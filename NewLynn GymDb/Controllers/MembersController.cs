@@ -10,87 +10,87 @@ using NewLynn_GymDb.Models;
 
 namespace NewLynn_GymDb.Controllers
 {
-    public class AttendencesController : Controller
+    public class MembersController : Controller
     {
         private readonly NewLynn_GymDbContext _context;
 
-        public AttendencesController(NewLynn_GymDbContext context)
+        public MembersController(NewLynn_GymDbContext context)
         {
             _context = context;
         }
 
-        // GET: Attendences
+        // GET: Members
         public async Task<IActionResult> Index()
         {
-              return _context.Attendence != null ? 
-                          View(await _context.Attendence.ToListAsync()) :
-                          Problem("Entity set 'NewLynn_GymDbContext.Attendence'  is null.");
+              return _context.Member != null ? 
+                          View(await _context.Member.ToListAsync()) :
+                          Problem("Entity set 'NewLynn_GymDbContext.Member'  is null.");
         }
 
-        // GET: Attendences/Details/5
+        // GET: Members/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Attendence == null)
+            if (id == null || _context.Member == null)
             {
                 return NotFound();
             }
 
-            var attendence = await _context.Attendence
-                .FirstOrDefaultAsync(m => m.AttendenceID == id);
-            if (attendence == null)
+            var member = await _context.Member
+                .FirstOrDefaultAsync(m => m.MemberId == id);
+            if (member == null)
             {
                 return NotFound();
             }
 
-            return View(attendence);
+            return View(member);
         }
 
-        // GET: Attendences/Create
+        // GET: Members/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Attendences/Create
+        // POST: Members/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AttendenceID,MemberID,EmployeeID,AttendenceDate,Status")] Attendence attendence)
+        public async Task<IActionResult> Create([Bind("MemberId,LastName,FirstName,Address,PhoneNumber,Email,DateOfBirth,MembershipType,JoinDate,PaymentInformation")] Member member)
         {
             if (!ModelState.IsValid)
             {
-                _context.Add(attendence);
+                _context.Add(member);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(attendence);
+            return View(member);
         }
 
-        // GET: Attendences/Edit/5
+        // GET: Members/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Attendence == null)
+            if (id == null || _context.Member == null)
             {
                 return NotFound();
             }
 
-            var attendence = await _context.Attendence.FindAsync(id);
-            if (attendence == null)
+            var member = await _context.Member.FindAsync(id);
+            if (member == null)
             {
                 return NotFound();
             }
-            return View(attendence);
+            return View(member);
         }
 
-        // POST: Attendences/Edit/5
+        // POST: Members/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AttendenceID,MemberID,EmployeeID,AttendenceDate,Status")] Attendence attendence)
+        public async Task<IActionResult> Edit(int id, [Bind("MemberId,LastName,FirstName,Address,PhoneNumber,Email,DateOfBirth,MembershipType,JoinDate,PaymentInformation")] Member member)
         {
-            if (id != attendence.AttendenceID)
+            if (id != member.MemberId)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace NewLynn_GymDb.Controllers
             {
                 try
                 {
-                    _context.Update(attendence);
+                    _context.Update(member);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AttendenceExists(attendence.AttendenceID))
+                    if (!MemberExists(member.MemberId))
                     {
                         return NotFound();
                     }
@@ -115,49 +115,49 @@ namespace NewLynn_GymDb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(attendence);
+            return View(member);
         }
 
-        // GET: Attendences/Delete/5
+        // GET: Members/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Attendence == null)
+            if (id == null || _context.Member == null)
             {
                 return NotFound();
             }
 
-            var attendence = await _context.Attendence
-                .FirstOrDefaultAsync(m => m.AttendenceID == id);
-            if (attendence == null)
+            var member = await _context.Member
+                .FirstOrDefaultAsync(m => m.MemberId == id);
+            if (member == null)
             {
                 return NotFound();
             }
 
-            return View(attendence);
+            return View(member);
         }
 
-        // POST: Attendences/Delete/5
+        // POST: Members/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Attendence == null)
+            if (_context.Member == null)
             {
-                return Problem("Entity set 'NewLynn_GymDbContext.Attendence'  is null.");
+                return Problem("Entity set 'NewLynn_GymDbContext.Member'  is null.");
             }
-            var attendence = await _context.Attendence.FindAsync(id);
-            if (attendence != null)
+            var member = await _context.Member.FindAsync(id);
+            if (member != null)
             {
-                _context.Attendence.Remove(attendence);
+                _context.Member.Remove(member);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AttendenceExists(int id)
+        private bool MemberExists(int id)
         {
-          return (_context.Attendence?.Any(e => e.AttendenceID == id)).GetValueOrDefault();
+          return (_context.Member?.Any(e => e.MemberId == id)).GetValueOrDefault();
         }
     }
 }

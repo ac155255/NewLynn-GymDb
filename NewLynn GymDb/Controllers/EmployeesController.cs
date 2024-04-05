@@ -10,101 +10,101 @@ using NewLynn_GymDb.Models;
 
 namespace NewLynn_GymDb.Controllers
 {
-    public class AttendencesController : Controller
+    public class EmployeesController : Controller
     {
         private readonly NewLynn_GymDbContext _context;
 
-        public AttendencesController(NewLynn_GymDbContext context)
+        public EmployeesController(NewLynn_GymDbContext context)
         {
             _context = context;
         }
 
-        // GET: Attendences
+        // GET: Employees
         public async Task<IActionResult> Index()
         {
-              return _context.Attendence != null ? 
-                          View(await _context.Attendence.ToListAsync()) :
-                          Problem("Entity set 'NewLynn_GymDbContext.Attendence'  is null.");
+              return _context.Employee != null ? 
+                          View(await _context.Employee.ToListAsync()) :
+                          Problem("Entity set 'NewLynn_GymDbContext.Employee'  is null.");
         }
 
-        // GET: Attendences/Details/5
+        // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Attendence == null)
+            if (id == null || _context.Employee == null)
             {
                 return NotFound();
             }
 
-            var attendence = await _context.Attendence
-                .FirstOrDefaultAsync(m => m.AttendenceID == id);
-            if (attendence == null)
+            var employee = await _context.Employee
+                .FirstOrDefaultAsync(m => m.EmployeeId == id);
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return View(attendence);
+            return View(employee);
         }
 
-        // GET: Attendences/Create
+        // GET: Employees/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Attendences/Create
+        // POST: Employees/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AttendenceID,MemberID,EmployeeID,AttendenceDate,Status")] Attendence attendence)
+        public async Task<IActionResult> Create([Bind("EmployeeId,LastName,FirstName,HireDate,Address,Position,Email,PhoneNumber,Salary")] Employee employee)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _context.Add(attendence);
+                _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(attendence);
+            return View(employee);
         }
 
-        // GET: Attendences/Edit/5
+        // GET: Employees/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Attendence == null)
+            if (id == null || _context.Employee == null)
             {
                 return NotFound();
             }
 
-            var attendence = await _context.Attendence.FindAsync(id);
-            if (attendence == null)
+            var employee = await _context.Employee.FindAsync(id);
+            if (employee == null)
             {
                 return NotFound();
             }
-            return View(attendence);
+            return View(employee);
         }
 
-        // POST: Attendences/Edit/5
+        // POST: Employees/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AttendenceID,MemberID,EmployeeID,AttendenceDate,Status")] Attendence attendence)
+        public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,LastName,FirstName,HireDate,Address,Position,Email,PhoneNumber,Salary")] Employee employee)
         {
-            if (id != attendence.AttendenceID)
+            if (id != employee.EmployeeId)
             {
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(attendence);
+                    _context.Update(employee);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AttendenceExists(attendence.AttendenceID))
+                    if (!EmployeeExists(employee.EmployeeId))
                     {
                         return NotFound();
                     }
@@ -115,49 +115,49 @@ namespace NewLynn_GymDb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(attendence);
+            return View(employee);
         }
 
-        // GET: Attendences/Delete/5
+        // GET: Employees/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Attendence == null)
+            if (id == null || _context.Employee == null)
             {
                 return NotFound();
             }
 
-            var attendence = await _context.Attendence
-                .FirstOrDefaultAsync(m => m.AttendenceID == id);
-            if (attendence == null)
+            var employee = await _context.Employee
+                .FirstOrDefaultAsync(m => m.EmployeeId == id);
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return View(attendence);
+            return View(employee);
         }
 
-        // POST: Attendences/Delete/5
+        // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Attendence == null)
+            if (_context.Employee == null)
             {
-                return Problem("Entity set 'NewLynn_GymDbContext.Attendence'  is null.");
+                return Problem("Entity set 'NewLynn_GymDbContext.Employee'  is null.");
             }
-            var attendence = await _context.Attendence.FindAsync(id);
-            if (attendence != null)
+            var employee = await _context.Employee.FindAsync(id);
+            if (employee != null)
             {
-                _context.Attendence.Remove(attendence);
+                _context.Employee.Remove(employee);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AttendenceExists(int id)
+        private bool EmployeeExists(int id)
         {
-          return (_context.Attendence?.Any(e => e.AttendenceID == id)).GetValueOrDefault();
+          return (_context.Employee?.Any(e => e.EmployeeId == id)).GetValueOrDefault();
         }
     }
 }

@@ -27,4 +27,10 @@ public class NewLynn_GymDbContext : IdentityDbContext<IdentityUser>
    
 
     public DbSet<NewLynn_GymDb.Models.Transaction>? Transaction { get; set; }
+   
+
+    public DbSet<NewLynn_GymDb.Models.Member>? Member { get; set; }
+   
+
+    public DbSet<NewLynn_GymDb.Models.Employee>? Employee { get; set; }
 }

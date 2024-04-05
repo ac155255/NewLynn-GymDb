@@ -58,7 +58,7 @@ namespace NewLynn_GymDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TransactionId,MemberID,EmployeeID,Amount,PaymentMethod,TransactionDate")] Transaction transaction)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(transaction);
                 await _context.SaveChangesAsync();
@@ -95,7 +95,7 @@ namespace NewLynn_GymDb.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
