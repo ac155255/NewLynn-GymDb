@@ -22,7 +22,7 @@ namespace NewLynn_GymDb.Controllers
         // GET: Attendences
         public async Task<IActionResult> Index()
         {
-              return _context.Attendence != null?
+            return _context.Attendence != null ?
                           View(await _context.Attendence.ToListAsync()) :
                           Problem("Entity set 'NewLynn_GymDbContext.Attendence'  is null.");
         }

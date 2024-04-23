@@ -4,7 +4,7 @@
 
 namespace NewLynn_GymDb.Migrations
 {
-    public partial class Employee : Migration
+    public partial class identitytable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

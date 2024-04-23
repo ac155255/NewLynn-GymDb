@@ -22,8 +22,8 @@ namespace NewLynn_GymDb.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-              return _context.Member != null ? 
-                          View(await _context.Member.ToListAsync()) :
+            return _context.Member != null ?
+                        View(await _context.Member.ToListAsync()) :
                           Problem("Entity set 'NewLynn_GymDbContext.Member'  is null.");
         }
 

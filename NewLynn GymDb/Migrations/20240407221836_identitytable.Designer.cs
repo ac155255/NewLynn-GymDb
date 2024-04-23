@@ -12,8 +12,8 @@ using NewLynn_GymDb.Areas.Identity.Data;
 namespace NewLynn_GymDb.Migrations
 {
     [DbContext(typeof(NewLynn_GymDbContext))]
-    [Migration("20240404234159_Employee")]
-    partial class Employee
+    [Migration("20240407221836_identitytable")]
+    partial class identitytable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
