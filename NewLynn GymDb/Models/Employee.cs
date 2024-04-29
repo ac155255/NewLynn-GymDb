@@ -31,7 +31,7 @@ namespace NewLynn_GymDb.Models
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Salary is required")]
-        // You may want to change the data type of Salary to a numeric type for proper validation
+      
         public string Salary { get; set; }
     }
 }
