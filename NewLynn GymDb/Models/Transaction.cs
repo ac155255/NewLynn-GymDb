@@ -15,7 +15,7 @@ namespace NewLynn_GymDb.Models
         public int EmployeeID { get; set; }
 
         [Required(ErrorMessage = "Amount is required")]
-        // You may want to change the data type of Amount to a numeric type for proper validation
+        
         public string Amount { get; set; }
 
         [Required(ErrorMessage = "Payment method is required")]
