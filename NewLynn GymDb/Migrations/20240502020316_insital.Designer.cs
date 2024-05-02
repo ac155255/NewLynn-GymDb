@@ -12,8 +12,8 @@ using NewLynn_GymDb.Areas.Identity.Data;
 namespace NewLynn_GymDb.Migrations
 {
     [DbContext(typeof(NewLynn_GymDbContext))]
-    [Migration("20240407221836_identitytable")]
-    partial class identitytable
+    [Migration("20240502020316_insital")]
+    partial class insital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -264,7 +264,33 @@ namespace NewLynn_GymDb.Migrations
 
                     b.HasKey("AttendenceID");
 
-                    b.ToTable("Attendence");
+                    b.ToTable("Attendance", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            AttendenceID = 123,
+                            AttendenceDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1633),
+                            EmployeeID = 12,
+                            MemberID = 12,
+                            Status = "Present"
+                        },
+                        new
+                        {
+                            AttendenceID = 321,
+                            AttendenceDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1677),
+                            EmployeeID = 5,
+                            MemberID = 123,
+                            Status = "Absent"
+                        },
+                        new
+                        {
+                            AttendenceID = 576,
+                            AttendenceDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1681),
+                            EmployeeID = 22,
+                            MemberID = 345,
+                            Status = "Absent"
+                        });
                 });
 
             modelBuilder.Entity("NewLynn_GymDb.Models.Employee", b =>
@@ -286,12 +312,14 @@ namespace NewLynn_GymDb.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -315,7 +343,45 @@ namespace NewLynn_GymDb.Migrations
 
                     b.HasIndex("TransactionId");
 
-                    b.ToTable("Employee");
+                    b.ToTable("Employee", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeId = 12,
+                            Address = "1603 Great South Road",
+                            Email = "ac7egc33@gmail.com",
+                            FirstName = "Sarah",
+                            HireDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1871),
+                            LastName = "Dawon",
+                            PhoneNumber = "0223583943",
+                            Position = "Manager",
+                            Salary = "$27.50/Hr"
+                        },
+                        new
+                        {
+                            EmployeeId = 5,
+                            Address = "1634 Great North Road",
+                            Email = "wfuw3hf@gmail.com",
+                            FirstName = "Ranav",
+                            HireDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1877),
+                            LastName = "Singh",
+                            PhoneNumber = "022383968",
+                            Position = "Front Desk",
+                            Salary = "$27.50/Hr"
+                        },
+                        new
+                        {
+                            EmployeeId = 22,
+                            Address = "1603 Great South Road",
+                            Email = "ac7egc33@gmail.com",
+                            FirstName = "Sarah",
+                            HireDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1881),
+                            LastName = "Dawon",
+                            PhoneNumber = "0223583943",
+                            Position = "Manager",
+                            Salary = "$27.50/Hr"
+                        });
                 });
 
             modelBuilder.Entity("NewLynn_GymDb.Models.Member", b =>
@@ -333,9 +399,8 @@ namespace NewLynn_GymDb.Migrations
                     b.Property<int?>("AttendenceID")
                         .HasColumnType("int");
 
-                    b.Property<string>("DateOfBirth")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -345,9 +410,8 @@ namespace NewLynn_GymDb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("JoinDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("JoinDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -369,7 +433,48 @@ namespace NewLynn_GymDb.Migrations
 
                     b.HasIndex("AttendenceID");
 
-                    b.ToTable("Member");
+                    b.ToTable("Member", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            MemberId = 12,
+                            Address = "1603 Great South Road",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1987),
+                            Email = "ac7egc33@gmail.com",
+                            FirstName = "Sarah",
+                            JoinDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1986),
+                            LastName = "Dawon",
+                            MembershipType = "Monthly",
+                            PaymentInformation = "4929 1234 5678 9012",
+                            PhoneNumber = "0223583943"
+                        },
+                        new
+                        {
+                            MemberId = 123,
+                            Address = "1603 Great South Road",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1987),
+                            Email = "ac7egc33@gmail.com",
+                            FirstName = "Sarah",
+                            JoinDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1991),
+                            LastName = "Dawon",
+                            MembershipType = "Monthly",
+                            PaymentInformation = "4929 1234 5678 9012",
+                            PhoneNumber = "0223583943"
+                        },
+                        new
+                        {
+                            MemberId = 345,
+                            Address = "1603 Great South Road",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1987),
+                            Email = "ac7egc33@gmail.com",
+                            FirstName = "Sarah",
+                            JoinDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1995),
+                            LastName = "Dawon",
+                            MembershipType = "Monthly",
+                            PaymentInformation = "4929 1234 5678 9012",
+                            PhoneNumber = "0223583943"
+                        });
                 });
 
             modelBuilder.Entity("NewLynn_GymDb.Models.Transaction", b =>
@@ -399,7 +504,36 @@ namespace NewLynn_GymDb.Migrations
 
                     b.HasKey("TransactionId");
 
-                    b.ToTable("Transaction");
+                    b.ToTable("Transaction", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            TransactionId = 321,
+                            Amount = "100.00",
+                            EmployeeID = 12,
+                            MemberID = 12,
+                            PaymentMethod = "Credit Card",
+                            TransactionDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(2053)
+                        },
+                        new
+                        {
+                            TransactionId = 987,
+                            Amount = "100.00",
+                            EmployeeID = 5,
+                            MemberID = 123,
+                            PaymentMethod = "Credit Card",
+                            TransactionDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(2057)
+                        },
+                        new
+                        {
+                            TransactionId = 654,
+                            Amount = "100.00",
+                            EmployeeID = 22,
+                            MemberID = 345,
+                            PaymentMethod = "Credit Card",
+                            TransactionDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(2060)
+                        });
                 });
 
             modelBuilder.Entity("MemberTransaction", b =>

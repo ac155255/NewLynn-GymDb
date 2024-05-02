@@ -17,9 +17,10 @@ namespace NewLynn_GymDb.Models
         [Required(ErrorMessage = "Address is required")]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "Phone number is required")]
-        [Phone(ErrorMessage = "Invalid phone number")]
+        [Phone]
+        [RegularExpression(@"^\+?\d{1,3}[- ]?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$", ErrorMessage = "Invalid phone number format")]
         public string PhoneNumber { get; set; }
+       
 
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid email address")]

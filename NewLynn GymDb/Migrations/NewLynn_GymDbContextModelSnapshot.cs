@@ -8,7 +8,7 @@ using NewLynn_GymDb.Areas.Identity.Data;
 
 #nullable disable
 
-namespace Flex_Zone_Fitness.Migrations
+namespace NewLynn_GymDb.Migrations
 {
     [DbContext(typeof(NewLynn_GymDbContext))]
     partial class NewLynn_GymDbContextModelSnapshot : ModelSnapshot
@@ -268,7 +268,7 @@ namespace Flex_Zone_Fitness.Migrations
                         new
                         {
                             AttendenceID = 123,
-                            AttendenceDate = new DateTime(2024, 4, 9, 10, 8, 16, 345, DateTimeKind.Local).AddTicks(1500),
+                            AttendenceDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1633),
                             EmployeeID = 12,
                             MemberID = 12,
                             Status = "Present"
@@ -276,7 +276,7 @@ namespace Flex_Zone_Fitness.Migrations
                         new
                         {
                             AttendenceID = 321,
-                            AttendenceDate = new DateTime(2024, 4, 9, 10, 8, 16, 345, DateTimeKind.Local).AddTicks(1556),
+                            AttendenceDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1677),
                             EmployeeID = 5,
                             MemberID = 123,
                             Status = "Absent"
@@ -284,7 +284,7 @@ namespace Flex_Zone_Fitness.Migrations
                         new
                         {
                             AttendenceID = 576,
-                            AttendenceDate = new DateTime(2024, 4, 9, 10, 8, 16, 345, DateTimeKind.Local).AddTicks(1561),
+                            AttendenceDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1681),
                             EmployeeID = 22,
                             MemberID = 345,
                             Status = "Absent"
@@ -310,12 +310,14 @@ namespace Flex_Zone_Fitness.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -348,7 +350,7 @@ namespace Flex_Zone_Fitness.Migrations
                             Address = "1603 Great South Road",
                             Email = "ac7egc33@gmail.com",
                             FirstName = "Sarah",
-                            HireDate = new DateTime(2024, 4, 9, 10, 8, 16, 345, DateTimeKind.Local).AddTicks(1825),
+                            HireDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1871),
                             LastName = "Dawon",
                             PhoneNumber = "0223583943",
                             Position = "Manager",
@@ -360,7 +362,7 @@ namespace Flex_Zone_Fitness.Migrations
                             Address = "1634 Great North Road",
                             Email = "wfuw3hf@gmail.com",
                             FirstName = "Ranav",
-                            HireDate = new DateTime(2024, 4, 9, 10, 8, 16, 345, DateTimeKind.Local).AddTicks(1835),
+                            HireDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1877),
                             LastName = "Singh",
                             PhoneNumber = "022383968",
                             Position = "Front Desk",
@@ -372,7 +374,7 @@ namespace Flex_Zone_Fitness.Migrations
                             Address = "1603 Great South Road",
                             Email = "ac7egc33@gmail.com",
                             FirstName = "Sarah",
-                            HireDate = new DateTime(2024, 4, 9, 10, 8, 16, 345, DateTimeKind.Local).AddTicks(1840),
+                            HireDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1881),
                             LastName = "Dawon",
                             PhoneNumber = "0223583943",
                             Position = "Manager",
@@ -439,7 +441,7 @@ namespace Flex_Zone_Fitness.Migrations
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1987),
                             Email = "ac7egc33@gmail.com",
                             FirstName = "Sarah",
-                            JoinDate = new DateTime(2024, 4, 9, 10, 8, 16, 345, DateTimeKind.Local).AddTicks(1981),
+                            JoinDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1986),
                             LastName = "Dawon",
                             MembershipType = "Monthly",
                             PaymentInformation = "4929 1234 5678 9012",
@@ -452,7 +454,7 @@ namespace Flex_Zone_Fitness.Migrations
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1987),
                             Email = "ac7egc33@gmail.com",
                             FirstName = "Sarah",
-                            JoinDate = new DateTime(2024, 4, 9, 10, 8, 16, 345, DateTimeKind.Local).AddTicks(1988),
+                            JoinDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1991),
                             LastName = "Dawon",
                             MembershipType = "Monthly",
                             PaymentInformation = "4929 1234 5678 9012",
@@ -465,7 +467,7 @@ namespace Flex_Zone_Fitness.Migrations
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1987),
                             Email = "ac7egc33@gmail.com",
                             FirstName = "Sarah",
-                            JoinDate = new DateTime(2024, 4, 9, 10, 8, 16, 345, DateTimeKind.Local).AddTicks(1992),
+                            JoinDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(1995),
                             LastName = "Dawon",
                             MembershipType = "Monthly",
                             PaymentInformation = "4929 1234 5678 9012",
@@ -510,7 +512,7 @@ namespace Flex_Zone_Fitness.Migrations
                             EmployeeID = 12,
                             MemberID = 12,
                             PaymentMethod = "Credit Card",
-                            TransactionDate = new DateTime(2024, 4, 9, 10, 8, 16, 345, DateTimeKind.Local).AddTicks(2074)
+                            TransactionDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(2053)
                         },
                         new
                         {
@@ -519,7 +521,7 @@ namespace Flex_Zone_Fitness.Migrations
                             EmployeeID = 5,
                             MemberID = 123,
                             PaymentMethod = "Credit Card",
-                            TransactionDate = new DateTime(2024, 4, 9, 10, 8, 16, 345, DateTimeKind.Local).AddTicks(2079)
+                            TransactionDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(2057)
                         },
                         new
                         {
@@ -528,7 +530,7 @@ namespace Flex_Zone_Fitness.Migrations
                             EmployeeID = 22,
                             MemberID = 345,
                             PaymentMethod = "Credit Card",
-                            TransactionDate = new DateTime(2024, 4, 9, 10, 8, 16, 345, DateTimeKind.Local).AddTicks(2083)
+                            TransactionDate = new DateTime(2024, 5, 2, 14, 3, 15, 904, DateTimeKind.Local).AddTicks(2060)
                         });
                 });
 
