@@ -13,7 +13,7 @@ namespace NewLynn_GymDb
                                     builder.Services.AddDbContext<NewLynn_GymDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-                                                builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<NewLynn_GymDbContext>();
 
             // Add services to the container.

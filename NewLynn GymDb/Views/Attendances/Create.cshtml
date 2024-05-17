@@ -1,22 +1,20 @@
-﻿@model NewLynn_GymDb.Models.Attendence
+﻿@model NewLynn_GymDb.Models.Attendance
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
-<h4>Attendence</h4>
+<h4>Attendance</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="AttendenceID" />
             <div class="form-group">
                 <label asp-for="MemberID" class="control-label"></label>
-                <input asp-for="MemberID" class="form-control" />
-                <span asp-validation-for="MemberID" class="text-danger"></span>
+                <select asp-for="MemberID" class ="form-control" asp-items="ViewBag.MemberID"></select>
             </div>
             <div class="form-group">
                 <label asp-for="EmployeeID" class="control-label"></label>
@@ -24,9 +22,9 @@
                 <span asp-validation-for="EmployeeID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AttendenceDate" class="control-label"></label>
-                <input asp-for="AttendenceDate" class="form-control" />
-                <span asp-validation-for="AttendenceDate" class="text-danger"></span>
+                <label asp-for="AttendanceDate" class="control-label"></label>
+                <input asp-for="AttendanceDate" class="form-control" />
+                <span asp-validation-for="AttendanceDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
@@ -34,7 +32,7 @@
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

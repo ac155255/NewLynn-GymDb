@@ -26,13 +26,15 @@ namespace NewLynn_GymDb.Models
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string Email { get; set; }
 
-        [RegularExpression(@"^\+?\d{1,3}[- ]?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$", ErrorMessage = "Invalid phone number format")]
+        [RegularExpression(@"^\+?\d{0,9}\d{1,14}", ErrorMessage = "Invalid phone number format")]
         public string PhoneNumber { get; set; }
         
 
         [Required(ErrorMessage = "Salary is required")]
       
         public string Salary { get; set; }
+       
+       public ICollection<Attendance> Attendances { get; set; }
     }
 }
 

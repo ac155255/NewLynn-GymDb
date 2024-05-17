@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewLynn_GymDb.Areas.Identity.Data;
 
@@ -11,9 +12,10 @@ using NewLynn_GymDb.Areas.Identity.Data;
 namespace NewLynn_GymDb.Migrations
 {
     [DbContext(typeof(NewLynn_GymDbContext))]
-    partial class NewLynn_GymDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240510001022_updatedmember")]
+    partial class updatedmember
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +36,7 @@ namespace NewLynn_GymDb.Migrations
 
                     b.HasIndex("TransactionsTransactionId");
 
-                    b.ToTable("MemberTransaction", (string)null);
+                    b.ToTable("MemberTransaction");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -262,12 +264,10 @@ namespace NewLynn_GymDb.Migrations
 
                     b.HasKey("AttendanceID");
 
-                    b.HasIndex("EmployeeID");
-
                     b.HasIndex("MemberID")
                         .IsUnique();
 
-                    b.ToTable("Attendance", (string)null);
+                    b.ToTable("Attendance");
                 });
 
             modelBuilder.Entity("NewLynn_GymDb.Models.Employee", b =>
@@ -280,6 +280,9 @@ namespace NewLynn_GymDb.Migrations
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AttendanceID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -313,9 +316,11 @@ namespace NewLynn_GymDb.Migrations
 
                     b.HasKey("EmployeeId");
 
+                    b.HasIndex("AttendanceID");
+
                     b.HasIndex("TransactionId");
 
-                    b.ToTable("Employee", (string)null);
+                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("NewLynn_GymDb.Models.Member", b =>
@@ -362,7 +367,7 @@ namespace NewLynn_GymDb.Migrations
 
                     b.HasKey("MemberId");
 
-                    b.ToTable("Member", (string)null);
+                    b.ToTable("Member");
                 });
 
             modelBuilder.Entity("NewLynn_GymDb.Models.Transaction", b =>
@@ -392,7 +397,7 @@ namespace NewLynn_GymDb.Migrations
 
                     b.HasKey("TransactionId");
 
-                    b.ToTable("Transaction", (string)null);
+                    b.ToTable("Transaction");
                 });
 
             modelBuilder.Entity("MemberTransaction", b =>
@@ -463,33 +468,33 @@ namespace NewLynn_GymDb.Migrations
 
             modelBuilder.Entity("NewLynn_GymDb.Models.Attendance", b =>
                 {
-                    b.HasOne("NewLynn_GymDb.Models.Employee", "Employee")
-                        .WithMany("Attendances")
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("NewLynn_GymDb.Models.Member", "Member")
                         .WithOne("Attendances")
                         .HasForeignKey("NewLynn_GymDb.Models.Attendance", "MemberID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Employee");
-
                     b.Navigation("Member");
                 });
 
             modelBuilder.Entity("NewLynn_GymDb.Models.Employee", b =>
                 {
+                    b.HasOne("NewLynn_GymDb.Models.Attendance", "Attendance")
+                        .WithMany("Employees")
+                        .HasForeignKey("AttendanceID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("NewLynn_GymDb.Models.Transaction", null)
                         .WithMany("Employees")
                         .HasForeignKey("TransactionId");
+
+                    b.Navigation("Attendance");
                 });
 
-            modelBuilder.Entity("NewLynn_GymDb.Models.Employee", b =>
+            modelBuilder.Entity("NewLynn_GymDb.Models.Attendance", b =>
                 {
-                    b.Navigation("Attendances");
+                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("NewLynn_GymDb.Models.Member", b =>

@@ -18,7 +18,7 @@ namespace NewLynn_GymDb.Models
         public string Address { get; set; }
 
         [Phone]
-        [RegularExpression(@"^\+?\d{1,3}[- ]?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$", ErrorMessage = "Invalid phone number format")]
+        [RegularExpression(@"^\+?\d{0,9}\d{1,14}", ErrorMessage = "Invalid phone number format")]
         public string PhoneNumber { get; set; }
        
 
@@ -28,6 +28,7 @@ namespace NewLynn_GymDb.Models
 
         [Required(ErrorMessage = "Date of birth is required")]
         [DataType(DataType.Date)]
+  
         public DateTime DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Membership type is required")]
@@ -41,6 +42,7 @@ namespace NewLynn_GymDb.Models
         public string PaymentInformation { get; set; }
 
         public ICollection<Transaction> Transactions { get; set; }
+        public virtual Attendance Attendances { get; set; }
     }
 }
 

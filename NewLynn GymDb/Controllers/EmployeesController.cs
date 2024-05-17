@@ -58,7 +58,7 @@ namespace NewLynn_GymDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EmployeeId,LastName,FirstName,HireDate,Address,Position,Email,PhoneNumber,Salary")] Employee employee)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
@@ -95,7 +95,7 @@ namespace NewLynn_GymDb.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {

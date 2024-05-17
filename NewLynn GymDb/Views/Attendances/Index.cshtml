@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NewLynn_GymDb.Models.Attendence>
+﻿@model IEnumerable<NewLynn_GymDb.Models.Attendance>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,16 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MemberID)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.EmployeeID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AttendenceDate)
+                @Html.DisplayNameFor(model => model.AttendanceDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member)
             </th>
             <th></th>
         </tr>
@@ -31,21 +31,21 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MemberID)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.EmployeeID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AttendenceDate)
+                @Html.DisplayFor(modelItem => item.AttendanceDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.AttendenceID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AttendenceID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AttendenceID">Delete</a>
+                @Html.DisplayFor(modelItem => item.Member.Address)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AttendanceID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AttendanceID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AttendanceID">Delete</a>
             </td>
         </tr>
 }

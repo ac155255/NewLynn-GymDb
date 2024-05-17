@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NewLynn_GymDb.Models
 {
-    public class Attendence
+    public class Attendance
     {
-        public int AttendenceID { get; set; }
+        public int AttendanceID { get; set; }
 
         [Required(ErrorMessage = "MemberID is required")]
         public int MemberID { get; set; }
@@ -14,15 +14,17 @@ namespace NewLynn_GymDb.Models
         [Required(ErrorMessage = "EmployeeID is required")]
         public int EmployeeID { get; set; }
 
-        [Required(ErrorMessage = "AttendenceDate is required")]
+        [Required(ErrorMessage = "AttendanceDate is required")]
         [DataType(DataType.DateTime)]
-        public DateTime AttendenceDate { get; set; }
+        public DateTime AttendanceDate { get; set; }
 
         [Required(ErrorMessage = "Status is required")]
         public string Status { get; set; }
+       
 
-        public ICollection<Member> Members { get; set; }
-        public ICollection<Employee> Employees { get; set; }
+        public virtual Member Member { get; set; }
+
+        public virtual Employee Employee { get; set; }
     }
 }
 

@@ -1,4 +1,4 @@
-﻿@model NewLynn_GymDb.Models.Attendence
+﻿@model NewLynn_GymDb.Models.Attendance
 
 @{
     ViewData["Title"] = "Details";
@@ -7,15 +7,9 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Attendence</h4>
+    <h4>Attendance</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MemberID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MemberID)
-        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.EmployeeID)
         </dt>
@@ -23,10 +17,10 @@
             @Html.DisplayFor(model => model.EmployeeID)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AttendenceDate)
+            @Html.DisplayNameFor(model => model.AttendanceDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AttendenceDate)
+            @Html.DisplayFor(model => model.AttendanceDate)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Status)
@@ -34,9 +28,15 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Status)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Member)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Member.Address)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.AttendenceID">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.AttendanceID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
