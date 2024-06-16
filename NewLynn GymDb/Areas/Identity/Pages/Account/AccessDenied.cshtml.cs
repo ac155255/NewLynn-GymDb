@@ -3,7 +3,7 @@
 #nullable disable
 
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using NewLynn_GymDb.Models;
 namespace NewLynn_GymDb.Areas.Identity.Pages.Account
 {
     /// <summary>

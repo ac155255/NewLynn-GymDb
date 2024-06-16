@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NewLynn_GymDb.Areas.Identity.Data;
 using NewLynn_GymDb.Models;
+using NuGet.Packaging.Signing;
 
 namespace NewLynn_GymDb.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly NewLynn_GymDbContext _context;
@@ -20,9 +23,26 @@ namespace NewLynn_GymDb.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SortOrder)
+
         {
-              return _context.Employee != null ? 
+            ViewData["NameSort"] = String.IsNullOrEmpty(SortOrder) ? "name_desc" : "";
+
+            var employees = from e in _context.Employee
+                            select e;
+
+            switch (SortOrder)
+            {
+                case "name_desc":
+                    employees = employees.OrderByDescending(e => e.LastName);
+                    break;
+
+                default:
+                    employees = employees.OrderBy(e => e.LastName);
+                        break;
+            }
+
+            return _context.Employee != null ? 
                           View(await _context.Employee.ToListAsync()) :
                           Problem("Entity set 'NewLynn_GymDbContext.Employee'  is null.");
         }

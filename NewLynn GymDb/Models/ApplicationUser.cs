@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace NewLynn_GymDb.Areas.Identity.Data
+namespace NewLynn_GymDb.Models
 {
     public class ApplicationUser : IdentityUser
     {

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NewLynn_GymDb.Migrations
 {
-    public partial class updatedmember : Migration
+    public partial class solvingerrors : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,6 +28,8 @@ namespace NewLynn_GymDb.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -193,25 +195,29 @@ namespace NewLynn_GymDb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Attendance",
+                name: "Employee",
                 columns: table => new
                 {
-                    AttendanceID = table.Column<int>(type: "int", nullable: false)
+                    EmployeeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MemberID = table.Column<int>(type: "int", nullable: false),
-                    EmployeeID = table.Column<int>(type: "int", nullable: false),
-                    AttendanceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HireDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Salary = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TransactionId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attendance", x => x.AttendanceID);
+                    table.PrimaryKey("PK_Employee", x => x.EmployeeId);
                     table.ForeignKey(
-                        name: "FK_Attendance_Member_MemberID",
-                        column: x => x.MemberID,
-                        principalTable: "Member",
-                        principalColumn: "MemberId",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Employee_Transaction_TransactionId",
+                        column: x => x.TransactionId,
+                        principalTable: "Transaction",
+                        principalColumn: "TransactionId");
                 });
 
             migrationBuilder.CreateTable(
@@ -239,36 +245,31 @@ namespace NewLynn_GymDb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employee",
+                name: "Attendance",
                 columns: table => new
                 {
-                    EmployeeId = table.Column<int>(type: "int", nullable: false)
+                    AttendanceID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HireDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Salary = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AttendanceID = table.Column<int>(type: "int", nullable: false),
-                    TransactionId = table.Column<int>(type: "int", nullable: true)
+                    MemberID = table.Column<int>(type: "int", nullable: false),
+                    EmployeeID = table.Column<int>(type: "int", nullable: false),
+                    AttendanceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employee", x => x.EmployeeId);
+                    table.PrimaryKey("PK_Attendance", x => x.AttendanceID);
                     table.ForeignKey(
-                        name: "FK_Employee_Attendance_AttendanceID",
-                        column: x => x.AttendanceID,
-                        principalTable: "Attendance",
-                        principalColumn: "AttendanceID",
+                        name: "FK_Attendance_Employee_EmployeeID",
+                        column: x => x.EmployeeID,
+                        principalTable: "Employee",
+                        principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Employee_Transaction_TransactionId",
-                        column: x => x.TransactionId,
-                        principalTable: "Transaction",
-                        principalColumn: "TransactionId");
+                        name: "FK_Attendance_Member_MemberID",
+                        column: x => x.MemberID,
+                        principalTable: "Member",
+                        principalColumn: "MemberId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -311,15 +312,15 @@ namespace NewLynn_GymDb.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Attendance_EmployeeID",
+                table: "Attendance",
+                column: "EmployeeID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Attendance_MemberID",
                 table: "Attendance",
                 column: "MemberID",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Employee_AttendanceID",
-                table: "Employee",
-                column: "AttendanceID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employee_TransactionId",
@@ -350,7 +351,7 @@ namespace NewLynn_GymDb.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Employee");
+                name: "Attendance");
 
             migrationBuilder.DropTable(
                 name: "MemberTransaction");
@@ -362,13 +363,13 @@ namespace NewLynn_GymDb.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Attendance");
-
-            migrationBuilder.DropTable(
-                name: "Transaction");
+                name: "Employee");
 
             migrationBuilder.DropTable(
                 name: "Member");
+
+            migrationBuilder.DropTable(
+                name: "Transaction");
         }
     }
 }

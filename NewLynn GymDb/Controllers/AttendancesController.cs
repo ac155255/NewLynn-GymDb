@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using NewLynn_GymDb.Models;
 
 namespace NewLynn_GymDb.Controllers
 {
+    [Authorize]
     public class AttendancesController : Controller
     {
         private readonly NewLynn_GymDbContext _context;
@@ -20,21 +22,9 @@ namespace NewLynn_GymDb.Controllers
         }
 
         // GET: Attendances
-        public async Task<IActionResult> Index( )
+        public async Task<IActionResult> Index()
         {
-
-            
-            var newLynn_GymDbContext = _context.Attendance.Include(a => a.Member);
-
-         
-
-                
-            
-
-
-
-
-
+            var newLynn_GymDbContext = _context.Attendance.Include(a => a.Employee).Include(a => a.Member);
             return View(await newLynn_GymDbContext.ToListAsync());
         }
 
@@ -47,6 +37,7 @@ namespace NewLynn_GymDb.Controllers
             }
 
             var attendance = await _context.Attendance
+                .Include(a => a.Employee)
                 .Include(a => a.Member)
                 .FirstOrDefaultAsync(m => m.AttendanceID == id);
             if (attendance == null)
@@ -60,7 +51,8 @@ namespace NewLynn_GymDb.Controllers
         // GET: Attendances/Create
         public IActionResult Create()
         {
-            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "Address");
+            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "EmployeeId");
+            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "MemberId");
             return View();
         }
 
@@ -77,7 +69,8 @@ namespace NewLynn_GymDb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "Address", attendance.MemberID);
+            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "FirstName", attendance.EmployeeID);
+            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "FirstName", attendance.MemberID);
             return View(attendance);
         }
 
@@ -94,6 +87,7 @@ namespace NewLynn_GymDb.Controllers
             {
                 return NotFound();
             }
+            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "Email", attendance.EmployeeID);
             ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "Address", attendance.MemberID);
             return View(attendance);
         }
@@ -110,7 +104,7 @@ namespace NewLynn_GymDb.Controllers
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
@@ -130,6 +124,7 @@ namespace NewLynn_GymDb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "Email", attendance.EmployeeID);
             ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "Address", attendance.MemberID);
             return View(attendance);
         }
@@ -143,6 +138,7 @@ namespace NewLynn_GymDb.Controllers
             }
 
             var attendance = await _context.Attendance
+                .Include(a => a.Employee)
                 .Include(a => a.Member)
                 .FirstOrDefaultAsync(m => m.AttendanceID == id);
             if (attendance == null)

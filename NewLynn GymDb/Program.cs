@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NewLynn_GymDb.Areas.Identity.Data;
+using NewLynn_GymDb.Models;
+
 namespace NewLynn_GymDb
 {
     public class Program
@@ -13,7 +15,7 @@ namespace NewLynn_GymDb
                                     builder.Services.AddDbContext<NewLynn_GymDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<NewLynn_GymDbContext>();
 
             // Add services to the container.

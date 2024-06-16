@@ -22,9 +22,9 @@
 
                 var Attendance = new Attendance[]
                 {
-            new Attendance { AttendanceID = 123, MemberID = 12, EmployeeID = 12, AttendanceDate = DateTime.Now, Status = "Present" },
-            new Attendance { AttendanceID = 321, MemberID = 123, EmployeeID = 05, AttendanceDate = DateTime.Now, Status = "Absent" },
-            new Attendance { AttendanceID = 576, MemberID = 345, EmployeeID = 22, AttendanceDate = DateTime.Now, Status = "Absent"}
+            new Attendance { AttendanceID = 123, MemberID = 12, EmployeeID = 12, AttendanceDate = DateTime.Now, Status = 0 },
+            new Attendance { AttendanceID = 321, MemberID = 123, EmployeeID = 05, AttendanceDate = DateTime.Now, Status = 0 },
+            new Attendance { AttendanceID = 576, MemberID = 345, EmployeeID = 22, AttendanceDate = DateTime.Now, Status = 0 }
 
                 };
                 foreach (Attendance s in Attendance)

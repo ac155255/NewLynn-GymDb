@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using NewLynn_GymDb.Areas.Identity.Data;
+using NewLynn_GymDb.Models;
 
 namespace NewLynn_GymDb.Areas.Identity.Pages.Account
 {
