@@ -13,6 +13,7 @@ namespace NewLynn_GymDb.Controllers
 {
     
     [Authorize]
+   
     public class dateValidator : ValidationAttribute
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
@@ -38,11 +39,22 @@ namespace NewLynn_GymDb.Controllers
         }
 
         // GET: Members
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return _context.Member != null ?
-                          View(await _context.Member.ToListAsync()) :
-                          Problem("Entity set 'NewLynn_GymDbContext.Member'  is null.");
+            if (_context.Member == null)
+            {
+                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
+            }
+
+            var members = from m in _context.Member
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                members = members.Where(s => s.FirstName!.Contains(searchString));
+            }
+
+            return View(await members.ToListAsync());
         }
 
         // GET: Members/Details/5

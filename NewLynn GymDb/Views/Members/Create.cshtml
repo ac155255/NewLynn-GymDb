@@ -4,6 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
+
 <h1>Create</h1>
 
 <h4>Member</h4>
@@ -39,8 +40,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control" />
+                <input asp-for="DateOfBirth" class="form-control" type="date" id="dateOfBirthInput" />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            
             </div>
             <div class="form-group">
                 <label asp-for="MembershipType" class="control-label"></label>
@@ -69,5 +71,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

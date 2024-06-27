@@ -24,14 +24,12 @@ namespace NewLynn_GymDb.Models
         [Required(ErrorMessage = "First name is required")]
         public string? FirstName { get; set; }
 
-        [Display(Name = "Hire Date")]
         [Required(ErrorMessage = "Hire date is required")]
-
-        [DateValidator] //custom attribute. see the dateValidator.cs file fpr implementation]
         [DataType(DataType.Date)]
-        [CustomValidation(typeof(Employee), nameof(HireDate))]
+        [Display(Name = "Hire Date")]
+        [CustomValidation(typeof(Employee), nameof(ValidateHireDate))]
         public DateTime HireDate { get; set; }
-        
+
         public static ValidationResult ValidateHireDate(DateTime HireDate, ValidationContext context)
         {
             if (HireDate > DateTime.Today)
@@ -41,6 +39,7 @@ namespace NewLynn_GymDb.Models
 
             return ValidationResult.Success;
         }
+    
 
         [Display(Name = "Address")]
         [StringLength(80, MinimumLength = 5, ErrorMessage = "Address must be between 5 and 80 characters.")]
