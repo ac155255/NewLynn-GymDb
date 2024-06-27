@@ -39,28 +39,22 @@ namespace NewLynn_GymDb.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index(string SortOrder)
-
+        public async Task<IActionResult> Index(string searchString)
         {
-            ViewData["NameSort"] = String.IsNullOrEmpty(SortOrder) ? "name_desc" : "";
-
-            var employees = from e in _context.Employee
-                            select e;
-
-            switch (SortOrder)
+            if (_context.Employee == null)
             {
-                case "name_desc":
-                    employees = employees.OrderByDescending(e => e.LastName);
-                    break;
-
-                default:
-                    employees = employees.OrderBy(e => e.LastName);
-                        break;
+                return Problem("Entity set 'FirstNameContext.Employee'  is null.");
             }
 
-            return _context.Employee != null ? 
-                          View(await _context.Employee.ToListAsync()) :
-                          Problem("Entity set 'NewLynn_GymDbContext.Employee'  is null.");
+            var employees= from m in _context.Employee
+                          select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                employees = employees.Where(s => s.FirstName!.Contains(searchString));
+            }
+
+            return View(await employees.ToListAsync());
         }
 
         // GET: Employees/Details/5
