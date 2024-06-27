@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Member)
+                @Html.DisplayNameFor(model => model.MemberID)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EmployeeID)
@@ -37,10 +37,10 @@
                     @item.Status.ToString()
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Member)
+                @Html.DisplayFor(modelItem => item.MemberID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Employee)
+                @Html.DisplayFor(modelItem => item.EmployeeID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.AttendanceID">Edit</a> |

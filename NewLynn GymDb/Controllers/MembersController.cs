@@ -43,7 +43,7 @@ namespace NewLynn_GymDb.Controllers
         {
             if (_context.Member == null)
             {
-                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
+                return Problem("Entity set 'FirstNameContext.Members'  is null.");
             }
 
             var members = from m in _context.Member

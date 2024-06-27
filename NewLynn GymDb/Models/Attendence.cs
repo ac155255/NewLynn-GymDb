@@ -21,7 +21,7 @@ namespace NewLynn_GymDb.Models
 
         [Required(ErrorMessage = "Employee is required")]
 
-        [Display(Name = "Employee")]
+        [Display(Name = "Employee ID")]
         [Range(1, int.MaxValue, ErrorMessage = "EmployeeID must be a positive integer.")]
         public int EmployeeID { get; set; }
 

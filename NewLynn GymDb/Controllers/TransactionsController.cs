@@ -24,15 +24,22 @@ namespace NewLynn_GymDb.Controllers
         }
 
         // GET: Transactions
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             if (_context.Transaction == null)
             {
-                return Problem("Entity set 'NewLynn_GymDbContext.Transaction' is null.");
+                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
             }
 
-            var transactions = await _context.Transaction.ToListAsync();
-            return View(transactions);
+            var transactions = from m in _context.Transaction
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                transactions = transactions.Where(s => s.Amount!.Contains(searchString));
+            }
+
+            return View(await transactions.ToListAsync());
         }
 
 
