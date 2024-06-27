@@ -39,22 +39,44 @@ namespace NewLynn_GymDb.Controllers
         }
 
         // GET: Members
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(
+    string sortOrder,
+    string currentFilter,
+    string searchString,
+    int? pageNumber)
         {
-            if (_context.Member == null)
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
+            if (searchString != null)
             {
-                return Problem("Entity set 'FirstNameContext.Members'  is null.");
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
             }
 
-            var members = from m in _context.Member
-                         select m;
-
+            var members = from s in _context.Member
+                           select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                members = members.Where(s => s.FirstName!.Contains(searchString));
+                members = members.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
             }
-
-            return View(await members.ToListAsync());
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    members = members.OrderByDescending(s => s.FirstName);
+                    break;
+                case "Date":
+                    members = members.OrderBy(s => s.FirstName);
+                    break;
+               
+            }
+            int pageSize = 3;
+            return View(await PaginatedList<Member>.CreateAsync(members.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Members/Details/5

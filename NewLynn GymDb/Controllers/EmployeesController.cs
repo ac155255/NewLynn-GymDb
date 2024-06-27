@@ -39,23 +39,46 @@ namespace NewLynn_GymDb.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(
+     string sortOrder,
+     string currentFilter,
+     string searchString,
+     int? pageNumber)
         {
-            if (_context.Employee == null)
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
+            if (searchString != null)
             {
-                return Problem("Entity set 'FirstNameContext.Employee'  is null.");
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
             }
 
-            var employees= from m in _context.Employee
-                          select m;
-
+            var employees= from s in _context.Employee
+                          select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                employees = employees.Where(s => s.FirstName!.Contains(searchString));
+                employees = employees.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
             }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    employees = employees.OrderByDescending(s => s.FirstName);
+                    break;
+                case "Date":
+                    employees = employees.OrderBy(s => s.FirstName);
+                    break;
 
-            return View(await employees.ToListAsync());
+            }
+            int pageSize = 3;
+            return View(await PaginatedList<Employee>.CreateAsync(employees.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
+
 
         // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
