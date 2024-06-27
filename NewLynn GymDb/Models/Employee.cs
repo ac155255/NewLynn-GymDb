@@ -1,6 +1,8 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using NewLynn_GymDb.Controllers;
+using NewLynn_GymDb.Models;
 
 namespace NewLynn_GymDb.Models
 {
@@ -23,18 +25,29 @@ namespace NewLynn_GymDb.Models
         public string? FirstName { get; set; }
 
         [Display(Name = "Hire Date")]
-        [Required(ErrorMessage = "Hire date is required") ] 
-       
+        [Required(ErrorMessage = "Hire date is required")]
 
+        [DateValidator] //custom attribute. see the dateValidator.cs file fpr implementation]
         [DataType(DataType.Date)]
+        [CustomValidation(typeof(Employee), nameof(HireDate))]
         public DateTime HireDate { get; set; }
+        
+        public static ValidationResult ValidateHireDate(DateTime HireDate, ValidationContext context)
+        {
+            if (HireDate > DateTime.Today)
+            {
+                return new ValidationResult("Hire date cannot be in the future.");
+            }
+
+            return ValidationResult.Success;
+        }
 
         [Display(Name = "Address")]
         [StringLength(80, MinimumLength = 5, ErrorMessage = "Address must be between 5 and 80 characters.")]
         public string? Address { get; set; }
         [Display(Name = "Position")]
         [Required(ErrorMessage = "Position is required")]
-        public string Position { get; set; }
+        public Position Position { get; set; }
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid email address")]
@@ -49,8 +62,8 @@ namespace NewLynn_GymDb.Models
         [Required(ErrorMessage = "Salary is required")]
 
         public string Salary { get; set; }
-       
-       public ICollection<Attendance> Attendances { get; set; }
+
+        public ICollection<Attendance> Attendances { get; set; }
     }
     public enum Position
     {
@@ -61,7 +74,6 @@ namespace NewLynn_GymDb.Models
     }
 
 }
-
 
 
 

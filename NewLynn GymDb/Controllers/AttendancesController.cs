@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +14,9 @@ using NewLynn_GymDb.Models;
 
 namespace NewLynn_GymDb.Controllers
 {
+
     [Authorize]
+   
     public class AttendancesController : Controller
     {
         private readonly NewLynn_GymDbContext _context;
@@ -163,14 +168,14 @@ namespace NewLynn_GymDb.Controllers
             {
                 _context.Attendance.Remove(attendance);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AttendanceExists(int id)
         {
-          return (_context.Attendance?.Any(e => e.AttendanceID == id)).GetValueOrDefault();
+            return (_context.Attendance?.Any(e => e.AttendanceID == id)).GetValueOrDefault();
         }
     }
 }

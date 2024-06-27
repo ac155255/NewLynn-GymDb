@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewLynn_GymDb.Areas.Identity.Data;
 
@@ -11,9 +12,10 @@ using NewLynn_GymDb.Areas.Identity.Data;
 namespace NewLynn_GymDb.Migrations
 {
     [DbContext(typeof(NewLynn_GymDbContext))]
-    partial class NewLynn_GymDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240617000225_DOBvalidation")]
+    partial class DOBvalidation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,13 +197,11 @@ namespace NewLynn_GymDb.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(225)
-                        .HasColumnType("nvarchar(225)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(225)
-                        .HasColumnType("nvarchar(225)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -297,8 +297,8 @@ namespace NewLynn_GymDb.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime2");
@@ -312,8 +312,9 @@ namespace NewLynn_GymDb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Position")
-                        .HasColumnType("int");
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Salary")
                         .IsRequired()
@@ -362,11 +363,13 @@ namespace NewLynn_GymDb.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("MembershipType")
-                        .HasColumnType("int");
+                    b.Property<string>("MembershipType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PaymentInformation")
-                        .HasColumnType("int");
+                    b.Property<string>("PaymentInformation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -395,8 +398,9 @@ namespace NewLynn_GymDb.Migrations
                     b.Property<int>("MemberID")
                         .HasColumnType("int");
 
-                    b.Property<int>("PaymentMethod")
-                        .HasColumnType("int");
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");

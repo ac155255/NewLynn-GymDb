@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using NewLynn_GymDb.Controllers;
 using NewLynn_GymDb.Models;
 
 namespace NewLynn_GymDb.Models
@@ -65,18 +66,29 @@ namespace NewLynn_GymDb.Models
 
         [Required(ErrorMessage = "Membership type is required")]
         [Display(Name = "Membership Type")]
-        public string MembershipType { get; set; }
-        
+        public MembershipType MembershipType { get; set; }
 
+        [dateValidator] //custom attribute. see the dateValidator.cs file fpr implementation
         [Required(ErrorMessage = "Join date is required")]
         [DataType(DataType.Date)]
         [Display(Name = "Join Date")]
-        public DateTime JoinDate { get; set; }
+        [CustomValidation(typeof(Member), nameof(JoinDate))]
         
+        public DateTime JoinDate { get; set; }
+        public static ValidationResult ValidateJoinDate(DateTime joinDate, ValidationContext context)
+        {
+            if (joinDate > DateTime.Today)
+            {
+                return new ValidationResult("Join date cannot be in the future.");
+            }
+
+            return ValidationResult.Success;
+        }
+
 
         [Required(ErrorMessage = "Payment information is required")]
         [Display(Name = "Payment Information")]
-        public string PaymentInformation { get; set; }
+        public PaymentInformation PaymentInformation { get; set; }
         
 
         public ICollection<Transaction> Transactions { get; set; }
@@ -101,9 +113,41 @@ namespace NewLynn_GymDb.Models
 
 
     }
-
-
-
     
+
+    public class ValidDateOfBirthAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if (value is DateTime dateOfBirth)
+            {
+                if (dateOfBirth > DateTime.Now)
+                {
+                    return new ValidationResult("Date of birth cannot be in the future.");
+                }
+
+                int age = DateTime.Now.Year - dateOfBirth.Year;
+                if (dateOfBirth > DateTime.Now.AddYears(-age))
+                {
+                    age--;
+                }
+
+                if (age < 18)
+                {
+                    return new ValidationResult("Employee must be at least 18 years old.");
+                }
+
+                return ValidationResult.Success;
+            }
+
+            return new ValidationResult("Invalid date of birth format.");
+        }
+    }
 }
+
+
+
+
+
+
 

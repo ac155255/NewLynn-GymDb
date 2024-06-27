@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -13,6 +14,21 @@ using NuGet.Packaging.Signing;
 namespace NewLynn_GymDb.Controllers
 {
     [Authorize]
+    public class DateValidator : ValidationAttribute
+    {
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+        {
+            if (value != null)
+            {
+                var date = (DateTime)value;
+                if (date > DateTime.Today)
+                {
+                    return new ValidationResult("The hire date cannot be in the future...");
+                }
+            }
+            return ValidationResult.Success;
+        }
+    }
     public class EmployeesController : Controller
     {
         private readonly NewLynn_GymDbContext _context;

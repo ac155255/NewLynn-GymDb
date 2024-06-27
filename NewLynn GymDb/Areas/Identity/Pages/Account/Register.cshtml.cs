@@ -79,12 +79,14 @@ namespace NewLynn_GymDb.Areas.Identity.Pages.Account
             [Required]
             [StringLength(225, ErrorMessage = "The first name field should have a maximum of 255 characters")]
             [DataType(DataType.Text)]
+            [RegularExpression(@"^[A-Z][a-z\s]*$" , ErrorMessage ="First Name can only contain letters. No spaces or special characters.")]
             [Display(Name = "FirstName")]
             public string FirstName { get; set; }
 
             [Required]
             [StringLength(225, ErrorMessage = "The last name field should have a maximum of 255 characters")]
             [DataType(DataType.Text)]
+            [RegularExpression(@"^[A-Z][a-z\s]*$" , ErrorMessage ="Last Name can only contian letters. No spaces or special characters.")]
             [Display(Name = "LastName")]
             public string LastName { get; set; }
             [Required]

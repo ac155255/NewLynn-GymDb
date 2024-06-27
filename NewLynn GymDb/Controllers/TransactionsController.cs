@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +13,7 @@ using NewLynn_GymDb.Models;
 namespace NewLynn_GymDb.Controllers
 {
     [Authorize]
+   
     public class TransactionsController : Controller
     {
         private readonly NewLynn_GymDbContext _context;
@@ -24,10 +26,15 @@ namespace NewLynn_GymDb.Controllers
         // GET: Transactions
         public async Task<IActionResult> Index()
         {
-              return _context.Transaction != null ? 
-                          View(await _context.Transaction.ToListAsync()) :
-                          Problem("Entity set 'NewLynn_GymDbContext.Transaction'  is null.");
+            if (_context.Transaction == null)
+            {
+                return Problem("Entity set 'NewLynn_GymDbContext.Transaction' is null.");
+            }
+
+            var transactions = await _context.Transaction.ToListAsync();
+            return View(transactions);
         }
+
 
         // GET: Transactions/Details/5
         public async Task<IActionResult> Details(int? id)

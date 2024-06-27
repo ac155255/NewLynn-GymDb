@@ -22,7 +22,10 @@ public class NewLynn_GymDbContext : IdentityDbContext<ApplicationUser>
         base.OnModelCreating(modelBuilder);
     }
 
-
+    internal static Task<string?> ToListAsync()
+    {
+        throw new NotImplementedException();
+    }
 
     public DbSet<NewLynn_GymDb.Models.Attendance>? Attendance { get; set; }
 

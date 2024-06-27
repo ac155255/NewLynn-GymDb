@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -8,10 +9,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NewLynn_GymDb.Areas.Identity.Data;
 using NewLynn_GymDb.Models;
-
 namespace NewLynn_GymDb.Controllers
 {
+    
     [Authorize]
+    public class dateValidator : ValidationAttribute
+    {
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+        {
+            if (value != null)
+            {
+                var date = (DateTime)value;
+                if (date < DateTime.Now)
+                {
+                    return new ValidationResult("The Join date cannot be in the past...");
+                }
+            }
+            return ValidationResult.Success;
+        }
+    }
     public class MembersController : Controller
     {
         private readonly NewLynn_GymDbContext _context;
@@ -24,7 +40,7 @@ namespace NewLynn_GymDb.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-              return _context.Member != null ? 
+            return _context.Member != null ?
                           View(await _context.Member.ToListAsync()) :
                           Problem("Entity set 'NewLynn_GymDbContext.Member'  is null.");
         }
