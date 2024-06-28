@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NewLynn_GymDb.Areas.Identity.Data;
 using NewLynn_GymDb.Models;
-using NuGet.Packaging.Signing;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NewLynn_GymDb.Controllers
 {
     [Authorize]
+    //his code defines a custom validation attribute DateValidator that checks if a given date is not in the future and returns a validation error if it is.
     public class DateValidator : ValidationAttribute
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
@@ -38,7 +40,8 @@ namespace NewLynn_GymDb.Controllers
             _context = context;
         }
 
-        // GET: Employees
+
+        //This code defines an asynchronous Index action method in an ASP.NET Core MVC controller that handles sorting, filtering, and paginating a list of employees based on user input.
         public async Task<IActionResult> Index(
      string sortOrder,
      string currentFilter,
@@ -75,7 +78,7 @@ namespace NewLynn_GymDb.Controllers
                     break;
 
             }
-            int pageSize = 3;
+            int pageSize = 6;
             return View(await PaginatedList<Employee>.CreateAsync(employees.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 

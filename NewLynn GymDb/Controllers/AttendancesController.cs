@@ -14,6 +14,7 @@ using NewLynn_GymDb.Models;
 
 namespace NewLynn_GymDb.Controllers
 {
+    //The [Authorize] is used to restrict access to a particular controller or action method to authenticated users only.
 
     [Authorize]
    

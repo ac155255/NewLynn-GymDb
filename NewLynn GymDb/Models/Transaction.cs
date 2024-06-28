@@ -12,13 +12,13 @@ namespace NewLynn_GymDb.Models
         public int TransactionId { get; set; }
 
         [Required(ErrorMessage = "MemberID is required")]
-        [Display(Name = "Member Id")]
+        [Display(Name = "Member ID")]
         [Range(1, int.MaxValue, ErrorMessage = "MemberID must be a positive integer.")]
         public int MemberID { get; set; }
         
 
         [Required(ErrorMessage = "EmployeeID is required")]
-        [Display(Name = "Employee Id")]
+        [Display(Name = "Employee ID")]
         [Range(1, int.MaxValue, ErrorMessage = "EmployeeID must be a positive integer.")]
         public int EmployeeID { get; set; }
         
@@ -33,13 +33,17 @@ namespace NewLynn_GymDb.Models
         public PaymentMethod PaymentMethod { get; set; }
 
 
-        [dateValidator] //custom attribute. see the dateValidator.cs file fpr implementation
+        //validation attributes to ensure that the "Transaction Date" field is required, formatted as a date and time, and validated using a custom attribute [dateValidator], which is implemented separately to enforce specific validation rules related to transaction dates.
+        [dateValidator]
         [Required(ErrorMessage = "Transaction date is required")]
         [DataType(DataType.DateTime)]
         [Display(Name = "Transaction Date")]
 
 
         public DateTime TransactionDate { get; set; }
+
+        //This static method ValidateTransactionDate validates a given TransactionDate against today's date, ensuring it's not in the future, and returns a ValidationResult indicating success or failure with an appropriate message.
+
         public static ValidationResult ValidateTransactionDate(DateTime TransactionDate, ValidationContext context)
         {
             if (TransactionDate > DateTime.Today)
@@ -51,10 +55,13 @@ namespace NewLynn_GymDb.Models
         }
 
 
-        public ICollection<Member> Members { get; set; }
-        public ICollection<Employee> Employees { get; set; }
+        public virtual Member Member { get; set; }
+
+
+        public virtual Employee Employee { get; set; }
     }
 
+    //This PaymentMethod enum defines two options: Cash and Card, representing different methods of payment.
     public enum PaymentMethod
     {
         Cash,

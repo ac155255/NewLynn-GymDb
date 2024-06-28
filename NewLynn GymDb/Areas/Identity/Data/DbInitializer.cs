@@ -1,73 +1,93 @@
-﻿namespace NewLynn_GymDb.Areas.Identity.Data
+﻿using NewLynn_GymDb.Areas.Identity.Data;
+using NewLynn_GymDb.Models;
+using System;
+using System.Diagnostics;
+using System.Linq;
+
+namespace NewLynn_GymDb.Data
 {
-    using NewLynn_GymDb;
-    using NewLynn_GymDb.Models;
-    using System;
-    using System.Diagnostics;
-    using System.Linq;
-
-   
-
-        public static class DbInitializer
+    public static class DbInitializer
+    {
+        public static void Initialize(NewLynn_GymDbContext context)
         {
-            public static void Initialize(NewLynn_GymDbContext context)
+            context.Database.EnsureCreated();
+
+            // Look for any members.
+            if (context.Member.Any())
             {
-                context.Database.EnsureCreated();
-
-                if (context.Attendance.Any())
-                {
-                    return;   // DB has been seeded
-                }
-
-                var Attendance = new Attendance[]
-                {
-                new Attendance { AttendanceID = 1, MemberID = 1, EmployeeID = 1, AttendanceDate = DateTime.Now, Status = status.Present},
-                new Attendance { AttendanceID = 321, MemberID = 123, EmployeeID = 05, AttendanceDate = DateTime.Now, Status = status.Absent},
-                new Attendance { AttendanceID = 576, MemberID = 345, EmployeeID = 22, AttendanceDate = DateTime.Now, Status = status.Present }
-                };
-                foreach (Attendance s in Attendance)
-                {
-                    context.Attendance.Add(s);
-                }
-                context.SaveChanges();
-
-                var Employees = new Employee[]
-                {
-                new Employee { EmployeeId = 12, FirstName = "Sarah", LastName = "Dawon", HireDate = DateTime.Now, Address = "1603 Great South Road", Email = "ac7egc33@gmail.com", PhoneNumber = "0223583943", Position = Position.Manager, Salary = "$27.50/Hr"},
-                new Employee { EmployeeId = 05, FirstName = "Ranav", LastName = "Singh", HireDate = DateTime.Now, Address = "1634 Great North Road", Email = "wfuw3hf@gmail.com", PhoneNumber = "022383968", Position = Position.Receptionist, Salary = "$27.50/Hr" },
-                new Employee { EmployeeId = 22, FirstName = "Yash", LastName = "Chand", HireDate = DateTime.Now, Address = "1603 Great South Road", Email = "ac7egc33@gmail.com", PhoneNumber = "0223583943", Position = Position.Cleaner, Salary = "$27.50/Hr" }
-                };
-                foreach (Employee c in Employees)
-                {
-                    context.Employee.Add(c);
-                }
-                context.SaveChanges();
-
-                var Members = new Member[]
-                {
-                new Member { MemberId = 12, FirstName = "Sarah", LastName = "Dawon", DateOfBirth = new DateTime(2000, 6, 7), Address = "1603 Great South Road", Email = "ac7egc33@gmail.com", PhoneNumber = "0223583943", JoinDate = DateTime.Now, MembershipType =MembershipType.Weekly, PaymentInformation =PaymentInformation.Card },
-                new Member { MemberId = 123, FirstName = "Sarah", LastName = "Dawon", DateOfBirth = new DateTime(2000, 6, 7), Address = "1603 Great South Road", Email = "ac7egc33@gmail.com", PhoneNumber = "0223583943", JoinDate = DateTime.Now, MembershipType = MembershipType.Yearly, PaymentInformation = PaymentInformation.Card  },
-                new Member { MemberId = 345, FirstName = "Sarah", LastName = "Dawon", DateOfBirth = new DateTime(2000, 6, 7), Address = "1603 Great South Road", Email = "ac7egc33@gmail.com", PhoneNumber = "0223583943", JoinDate = DateTime.Now, MembershipType =MembershipType.Monthly, PaymentInformation = PaymentInformation.Cash }
-                };
-                foreach (Member e in Members)
-                {
-                    context.Member.Add(e);
-                }
-                context.SaveChanges();
-
-                var Transactions = new Transaction[]
-                {
-                new Transaction { TransactionId = 321, MemberID = 12, EmployeeID = 12, Amount = "100.00" , PaymentMethod = PaymentMethod.Card, TransactionDate = DateTime.Now },
-                new Transaction { TransactionId = 987, MemberID = 123, EmployeeID = 05, Amount = "100.00", PaymentMethod = PaymentMethod.Cash, TransactionDate = DateTime.Now },
-                new Transaction { TransactionId = 654, MemberID = 345, EmployeeID = 22, Amount = "100.00", PaymentMethod = PaymentMethod.Cash, TransactionDate = DateTime.Now }
-                };
-                foreach (Transaction s in Transactions)
-                {
-                    context.Transaction.Add(s);
-                }
-                context.SaveChanges();
+                return;   // DB has been seeded
             }
+
+            var members = new Member[]
+            {
+            new Member{LastName="Johnson",FirstName="Emily",Address="456 Oak Avenue, Metropolis",PhoneNumber="02242387456",Email="emily.johnson@example.com",DateOfBirth=DateTime.Parse("19/03/1999"),MembershipType=MembershipType.Yearly,JoinDate=DateTime.Parse("30/06/2024"),PaymentInformation=PaymentInformation.Card },
+            new Member{LastName="Williams",FirstName="Michael",Address="789 Pine Road, Gotham",PhoneNumber="022423832334",Email=" michael.williams@example.com",DateOfBirth=DateTime.Parse("9/07/1992"),MembershipType=MembershipType.Yearly,JoinDate=DateTime.Parse("27/06/2024"),PaymentInformation=PaymentInformation.Card },
+             new Member{LastName="Brown",FirstName="Sarah",Address="101 Birch Boulevard, Smallville",PhoneNumber="02242383238",Email="sarah.brown@example.com",DateOfBirth=DateTime.Parse("19/03/1999"),MembershipType=MembershipType.Monthly,JoinDate=DateTime.Parse("29/06/2024"),PaymentInformation=PaymentInformation.Cash }
+
+            };
+            foreach (Member s in members)
+            {
+                context.Member.Add(s);
+            }
+            context.SaveChanges();
+
+            // Look for any employees.
+            if (context.Employee.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            var employees = new Employee[]
+            {
+            new Employee{LastName="Baker",FirstName="Anna",HireDate=DateTime.Parse("27/06/2024"),Address="1458 great north road",Position=Position.Receptionist,Email="anna.baker@example.com",PhoneNumber="02242387453",Salary="$25.70" },
+            new Employee{LastName="Carter",FirstName="John",HireDate=DateTime.Parse("29/06/2024"),Address="3287 great south road",Position=Position.Trainer,Email="john.carter@example.com",PhoneNumber="02242383234",Salary="$33.90" },
+            new Employee{LastName="Evans",FirstName="Laura",HireDate=DateTime.Parse("29/06/2024"),Address="123 Maple Street road",Position=Position.Manager,Email="laura.evans@example.com",PhoneNumber="02242387453",Salary="$35.90" },
+
+            };
+            foreach (Employee c in employees)
+            {
+                context.Employee.Add(c);
+            }
+            context.SaveChanges();
+
+            // Look for any attendances.
+            if (context.Attendance.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            var attendances = new Attendance[]
+            {
+            new Attendance{AttendanceDate=DateTime.Parse("27/06/2024 12:00:00 am"),Status=status.Present,MemberID= 3,EmployeeID= 4},
+             new Attendance{AttendanceDate=DateTime.Parse("05/07/2024 12:00:00 am"),Status=status.Absent,MemberID= 4,EmployeeID= 5},
+              new Attendance{AttendanceDate=DateTime.Parse("27/06/2024 12:00:00 am"),Status=status.Present,MemberID= 5,EmployeeID= 3},
+
+            };
+            foreach (Attendance e in attendances)
+            {
+                context.Attendance.Add(e);
+            }
+            context.SaveChanges();
+
+            // Look for any transactions.
+            if (context.Transaction.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            var transactions = new Transaction[]
+            {
+            new Transaction{MemberID= 3,EmployeeID = 4,Amount="$80.00",PaymentMethod=PaymentMethod.Card,TransactionDate=DateTime.Parse("27/06/2024 12:00:00 am") },
+            new Transaction{MemberID= 4,EmployeeID = 5,Amount="$500.00",PaymentMethod=PaymentMethod.Cash,TransactionDate=DateTime.Parse("0/07/2024 12:00:00 am") },
+            new Transaction{MemberID= 5,EmployeeID = 5,Amount="$20.00",PaymentMethod=PaymentMethod.Cash,TransactionDate=DateTime.Parse("29/06/2024 12:00:00 am") },
+
+
+            };
+            foreach (Transaction e in transactions)
+            {
+                context.Transaction.Add(e);
+            }
+            context.SaveChanges();
         }
     }
-
-        
+}

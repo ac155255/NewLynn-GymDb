@@ -25,7 +25,7 @@ namespace NewLynn_GymDb.Models
         [Range(1, int.MaxValue, ErrorMessage = "EmployeeID must be a positive integer.")]
         public int EmployeeID { get; set; }
 
-        [DateValidator] //custom attribute. see the dateValidator.cs file fpr implementation
+        [DateValidator]
         [Display(Name = "Attendance Date")]
         [Required(ErrorMessage = "AttendanceDate is required")]
         [DataType(DataType.DateTime)]
@@ -51,13 +51,14 @@ namespace NewLynn_GymDb.Models
 
         public virtual Employee Employee { get; set; }
 
+        //This method ToListAsync is declared as internal and static, intending to return a Task<string?>. However, it currently throws a NotImplementedException, indicating it's not yet implemented and needs to be completed to provide functionality.
         internal static Task<string?> ToListAsync()
         {
             throw new NotImplementedException();
         }
     }
 
-
+    //This status enum defines two options: Present and Absent, representing different status.
     public enum status { 
     
         Present,

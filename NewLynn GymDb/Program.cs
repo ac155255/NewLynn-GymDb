@@ -1,3 +1,5 @@
+using NewLynn_GymDb.Data;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NewLynn_GymDb.Areas.Identity.Data;

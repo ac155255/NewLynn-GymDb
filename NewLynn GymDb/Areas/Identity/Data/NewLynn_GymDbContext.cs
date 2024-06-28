@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NewLynn_GymDb.Models;
 using System.Reflection.Emit;
+using NewLynn_GymDb.Areas.Identity.Pages;
+
 
 namespace NewLynn_GymDb.Areas.Identity.Data;
 

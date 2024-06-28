@@ -15,12 +15,12 @@
             <input type="hidden" asp-for="TransactionId" />
             <div class="form-group">
                 <label asp-for="MemberID" class="control-label"></label>
-                <input asp-for="MemberID" class="form-control" />
+                <select asp-for="MemberID" class="form-control" asp-items="ViewBag.MemberID"></select>
                 <span asp-validation-for="MemberID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EmployeeID" class="control-label"></label>
-                <input asp-for="EmployeeID" class="form-control" />
+                <select asp-for="EmployeeID" class="form-control" asp-items="ViewBag.EmployeeID"></select>
                 <span asp-validation-for="EmployeeID" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="PaymentMethod" class="control-label"></label>
-                <input asp-for="PaymentMethod" class="form-control" />
+                <select asp-for="PaymentMethod" class="form-control"></select>
                 <span asp-validation-for="PaymentMethod" class="text-danger"></span>
             </div>
             <div class="form-group">

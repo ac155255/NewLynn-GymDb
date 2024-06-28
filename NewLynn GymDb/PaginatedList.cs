@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using NewLynn_GymDb.Models;
 
 namespace NewLynn_GymDb.Models
 {

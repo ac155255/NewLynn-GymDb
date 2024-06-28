@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -12,8 +14,8 @@ using NewLynn_GymDb.Models;
 
 namespace NewLynn_GymDb.Controllers
 {
+    //The [Authorize] is used to restrict access to a particular controller or action method to authenticated users only.
     [Authorize]
-   
     public class TransactionsController : Controller
     {
         private readonly NewLynn_GymDbContext _context;
@@ -23,16 +25,17 @@ namespace NewLynn_GymDb.Controllers
             _context = context;
         }
 
-        // GET: Transactions
+        // The Index action method asynchronously retrieves and filters transactions from _context.Transaction based on a search string, returning them as a view result.
+
         public async Task<IActionResult> Index(string searchString)
         {
             if (_context.Transaction == null)
             {
-                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
+                return Problem("Entity set 'AmountTransactionContext.Transaction'  is null.");
             }
 
             var transactions = from m in _context.Transaction
-                         select m;
+                               select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -41,7 +44,6 @@ namespace NewLynn_GymDb.Controllers
 
             return View(await transactions.ToListAsync());
         }
-
 
         // GET: Transactions/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -52,6 +54,8 @@ namespace NewLynn_GymDb.Controllers
             }
 
             var transaction = await _context.Transaction
+                .Include(t => t.Employee)
+                .Include(t => t.Member)
                 .FirstOrDefaultAsync(m => m.TransactionId == id);
             if (transaction == null)
             {
@@ -60,11 +64,11 @@ namespace NewLynn_GymDb.Controllers
 
             return View(transaction);
         }
-
+        
         // GET: Transactions/Create
         public IActionResult Create()
         {
-            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "EmployeeId");
+            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId","EmployeeId" );
             ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "MemberId");
             return View();
         }
@@ -82,6 +86,8 @@ namespace NewLynn_GymDb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "Email", transaction.EmployeeID);
+            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "Address", transaction.MemberID);
             return View(transaction);
         }
 
@@ -98,6 +104,8 @@ namespace NewLynn_GymDb.Controllers
             {
                 return NotFound();
             }
+            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "Email", transaction.EmployeeID);
+            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "Address", transaction.MemberID);
             return View(transaction);
         }
 
@@ -133,6 +141,8 @@ namespace NewLynn_GymDb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "Email", transaction.EmployeeID);
+            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "Address", transaction.MemberID);
             return View(transaction);
         }
 
@@ -145,6 +155,8 @@ namespace NewLynn_GymDb.Controllers
             }
 
             var transaction = await _context.Transaction
+                .Include(t => t.Employee)
+                .Include(t => t.Member)
                 .FirstOrDefaultAsync(m => m.TransactionId == id);
             if (transaction == null)
             {

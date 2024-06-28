@@ -9,11 +9,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NewLynn_GymDb.Areas.Identity.Data;
 using NewLynn_GymDb.Models;
+
+
 namespace NewLynn_GymDb.Controllers
 {
-    
+
     [Authorize]
-   
+
+
+    //This code defines a custom validation attribute dateValidator that checks if a given date is not in the past and returns a validation error if it is.
     public class dateValidator : ValidationAttribute
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
@@ -75,7 +79,7 @@ namespace NewLynn_GymDb.Controllers
                     break;
                
             }
-            int pageSize = 3;
+            int pageSize = 6;
             return View(await PaginatedList<Member>.CreateAsync(members.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
