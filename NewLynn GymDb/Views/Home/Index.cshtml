@@ -2,26 +2,80 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    body {
+        background: url('https://cdn.openart.ai/uploads/image_IOKdgwZe_1719764793304_raw.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+    }
+
+    .jumbotron {
+       
+        text-align: center;
+        padding: 100px 25px;
+        margin: 0;
+    }
+
+        .jumbotron h1 {
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        .jumbotron p {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+
+    .features {
+        display: flex;
+        justify-content: space-around;
+        margin: 50px 0;
+        color: #fff;
+    }
+
+    .feature {
+        text-align: center;
+        width: 200px;
+    }
+
+        .feature img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 1em;
+        }
+</style>
+
 <div class="jumbotron">
     <h1>Flex Zone Fitness</h1>
+    <p>Your Fitness, Our Priority</p>
+    <p><a class="btn-members" href="/members">Join Now</a></p>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Welcome to Flex Zone Fitness</h2>
-        <p>
-            Contoso University is a sample application that
-            demonstrates how to use Entity Framework Core in an
-            ASP.NET Core MVC web application.
-        </p>
+
+<div class="features">
+    <div class="feature">
+        <h3>Strength</h3>
+        <p>Build muscle and increase your strength with our specialized training programs.</p>
     </div>
-    <div class="col-md-4">
-        <h2>Build it from scratch</h2>
-        <p>You can build the application by following the steps in a series of tutorials.</p>
-        <p><a class="btn btn-default" href="https://docs.asp.net/en/latest/data/ef-mvc/intro.html">See the tutorial &raquo;</a></p>
+    <div class="feature">
+        <h3>Stretch</h3>
+        <p>Improve your flexibility and prevent injuries with our stretching classes.</p>
     </div>
-    <div class="col-md-4">
-        <h2>Download it</h2>
-        <p>You can download the completed project from GitHub.</p>
-        <p><a class="btn btn-default" href="https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-mvc/intro/samples/5cu-final">See project source code &raquo;</a></p>
+    <div class="feature">
+        <h3>Sweat</h3>
+        <p>Burn calories and get your heart pumping with our cardio workouts.</p>
+    </div>
+    <div class="feature">
+        <h3>Power</h3>
+        <p>Enhance your endurance and power with our high-intensity interval training.</p>
     </div>
 </div>
+

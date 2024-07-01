@@ -14,8 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace NewLynn_GymDb.Controllers
 {
-    [Authorize]
-    //his code defines a custom validation attribute DateValidator that checks if a given date is not in the future and returns a validation error if it is.
+    
     public class DateValidator : ValidationAttribute
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
@@ -31,6 +30,8 @@ namespace NewLynn_GymDb.Controllers
             return ValidationResult.Success;
         }
     }
+    [Authorize]
+    //This code defines a custom validation attribute DateValidator that checks if a given date is not in the future and returns a validation error if it is.
     public class EmployeesController : Controller
     {
         private readonly NewLynn_GymDbContext _context;

@@ -4,12 +4,152 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    body {
+        background: url('https://cdn.openart.ai/uploads/image_IOKdgwZe_1719764793304_raw.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+    }
+
+    .jumbotron {
+        background: rgba(0, 0, 0, 0.5); /* Added a dark overlay to make the text readable */
+        text-align: center;
+        padding: 100px 25px;
+        margin: 0;
+    }
+
+        .jumbotron h1 {
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        .jumbotron p {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+
+    .btn-members {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1em;
+    }
+
+    .features {
+        display: flex;
+        justify-content: space-around;
+        margin: 50px 0;
+        color: #fff;
+    }
+
+    .feature {
+        text-align: center;
+        width: 200px;
+    }
+
+        .feature img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 1em;
+        }
+
+    table {
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        color: white;
+    }
+
+    th {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    tr {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+        tr:hover {
+            background-color: dimgrey;
+        }
+
+    .edit-link, .details-link, .delete-link {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .edit-link:hover, .details-link:hover, .delete-link:hover {
+            text-decoration: underline;
+        }
+
+    footer {
+        text-align: center;
+        padding: 20px 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .privacy-link {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .privacy-link:hover {
+            text-decoration: underline;
+        }
+
+    .form-actions {
+        margin: 20px 0;
+    }
+
+        .form-actions input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .form-actions input[type="submit"] {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            background-color: #007bff;
+            color: white;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+            .form-actions input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+
+        .form-actions a {
+            color: white;
+            margin-left: 10px;
+        }
+</style>
+
 <h1>Employee</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
-    
 </p>
+
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
@@ -18,71 +158,43 @@
             <a asp-action="Index">Back to Full List</a>
         </p>
     </div>
-</form>   
+</form>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.LastName)</th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.FirstName)</a>
             </th>
-         
-            <th>
-                @Html.DisplayNameFor(model => model.HireDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Position)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Salary)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.HireDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Address)</th>
+            <th>@Html.DisplayNameFor(model => model.Position)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.Salary)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HireDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Position)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salary)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EmployeeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                <td>@Html.DisplayFor(modelItem => item.HireDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                <td>@Html.DisplayFor(modelItem => item.Position)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                <td>@Html.DisplayFor(modelItem => item.Salary)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.EmployeeId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+

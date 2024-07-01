@@ -15,8 +15,6 @@ namespace NewLynn_GymDb.Controllers
 {
 
     [Authorize]
-
-
     //This code defines a custom validation attribute dateValidator that checks if a given date is not in the past and returns a validation error if it is.
     public class dateValidator : ValidationAttribute
     {
@@ -33,6 +31,8 @@ namespace NewLynn_GymDb.Controllers
             return ValidationResult.Success;
         }
     }
+
+    [Authorize]
     public class MembersController : Controller
     {
         private readonly NewLynn_GymDbContext _context;

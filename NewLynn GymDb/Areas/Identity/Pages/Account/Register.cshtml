@@ -3,6 +3,78 @@
 @{
     ViewData["Title"] = "Register";
 }
+<style>
+    body {
+        background: url('https://i.pinimg.com/564x/89/b7/b5/89b7b5da553719634ea0673f08e8eedc.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 20px;
+        margin: 0 auto;
+        width: 50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        margin-top: 50px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin: 15px 0 5px;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        box-sizing: border-box;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        color: white;
+    }
+
+        input {
+    background-color: rgba(255, 255, 255, 0.7); /* This is white color with full opacity */
+}
+
+        
+
+    input[type="submit"] {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+    .privacy-link {
+        color: #007bff;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .privacy-link:hover {
+            text-decoration: underline;
+        }
+</style>
 
 <h1>@ViewData["Title"]</h1>
 
