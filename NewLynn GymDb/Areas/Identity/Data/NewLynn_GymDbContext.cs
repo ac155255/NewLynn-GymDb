@@ -29,16 +29,13 @@ public class NewLynn_GymDbContext : IdentityDbContext<ApplicationUser>
         throw new NotImplementedException();
     }
 
-    public DbSet<NewLynn_GymDb.Models.Attendance>? Attendance { get; set; }
+    
 
 
-    public DbSet<NewLynn_GymDb.Models.Transaction>? Transaction { get; set; }
-
-
-    public DbSet<NewLynn_GymDb.Models.Member>? Member { get; set; }
-
-
-    public DbSet<NewLynn_GymDb.Models.Employee>? Employee { get; set; }
+    public DbSet<Transaction> Transaction { get; set; }
+    public DbSet<Attendance> Attendances { get; set; }
+    public DbSet<Member> Members { get; set; }
+    public DbSet<Employee> Employees { get; set; }
 }
 public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {

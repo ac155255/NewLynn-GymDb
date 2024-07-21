@@ -13,7 +13,7 @@ namespace NewLynn_GymDb.Data
             context.Database.EnsureCreated();
 
             // Look for any members.
-            if (context.Member.Any())
+            if (context.Members.Any())
             {
                 return;   // DB has been seeded
             }
@@ -27,12 +27,12 @@ namespace NewLynn_GymDb.Data
             };
             foreach (Member s in members)
             {
-                context.Member.Add(s);
+                context.Members.Add(s);
             }
             context.SaveChanges();
 
             // Look for any employees.
-            if (context.Employee.Any())
+            if (context.Employees.Any())
             {
                 return;   // DB has been seeded
             }
@@ -46,26 +46,26 @@ namespace NewLynn_GymDb.Data
             };
             foreach (Employee c in employees)
             {
-                context.Employee.Add(c);
+                context.Employees.Add(c);
             }
             context.SaveChanges();
 
             // Look for any attendances.
-            if (context.Attendance.Any())
+            if (context.Attendances.Any())
             {
                 return;   // DB has been seeded
             }
 
             var attendances = new Attendance[]
             {
-            new Attendance{AttendanceDate=DateTime.Parse("27/06/2024 12:00:00 am"),Status=status.Present,MemberID= 3,EmployeeID= 4},
-             new Attendance{AttendanceDate=DateTime.Parse("05/07/2024 12:00:00 am"),Status=status.Absent,MemberID= 4,EmployeeID= 5},
-              new Attendance{AttendanceDate=DateTime.Parse("27/06/2024 12:00:00 am"),Status=status.Present,MemberID= 5,EmployeeID= 3},
+            new Attendance{AttendanceDate=DateTime.Parse("27/06/2024 12:00:00 am"),Status=Status.Present,MemberId= 3,EmployeeId= 4},
+             new Attendance{AttendanceDate=DateTime.Parse("05/07/2024 12:00:00 am"),Status=Status.Absent,MemberId= 4,EmployeeId = 5},
+              new Attendance{AttendanceDate=DateTime.Parse("27/06/2024 12:00:00 am"),Status=Status.Present,MemberId = 5, EmployeeId = 3},
 
             };
             foreach (Attendance e in attendances)
             {
-                context.Attendance.Add(e);
+                context.Attendances.Add(e);
             }
             context.SaveChanges();
 

@@ -3,115 +3,7 @@
 @{
     ViewData["Title"] = "Delete";
 }
-<style>
-    body {
-        background: url('https://i.pinimg.com/564x/89/b7/b5/89b7b5da553719634ea0673f08e8eedc.jpg') no-repeat center center fixed;
-        background-size: cover;
-        color: white;
-    }
 
-    .jumbotron {
-        background: rgba(0, 0, 0, 0.5); /* Added a dark overlay to make the text readable */
-        text-align: center;
-        padding: 100px 25px;
-        margin: 0;
-    }
-
-        .jumbotron h1 {
-            font-size: 3em;
-            font-weight: bold;
-        }
-
-        .jumbotron p {
-            font-size: 1.2em;
-            margin: 20px 0;
-        }
-
-    .btn-members {
-        background-color: #28a745;
-        color: white;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 1em;
-    }
-
-    .features {
-        display: flex;
-        justify-content: space-around;
-        margin: 50px 0;
-        color: #fff;
-    }
-
-    .feature {
-        text-align: center;
-        width: 200px;
-    }
-
-        .feature img {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 20px;
-        }
-
-        .feature h3 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-
-        .feature p {
-            font-size: 1em;
-        }
-
-    table {
-        width: 100%;
-        margin: 20px 0;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        padding: 15px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-        color: white;
-    }
-
-    th {
-        background-color: rgba(0, 0, 0, 0.7);
-    }
-
-    tr {
-        background-color: rgba(0, 0, 0, 0.5);
-    }
-
-        tr:hover {
-            background-color: dimgrey;
-        }
-
-    .edit-link, .details-link, .delete-link {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-        .edit-link:hover, .details-link:hover, .delete-link:hover {
-            text-decoration: underline;
-        }
-
-    footer {
-        text-align: center;
-        padding: 20px 0;
-        background: rgba(0, 0, 0, 0.5);
-    }
-
-    .privacy-link {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-        .privacy-link:hover {
-            text-decoration: underline;
-        }
-</style>
 <h1>Delete</h1>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -119,6 +11,18 @@
     <h4>Attendance</h4>
     <hr />
     <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MemberFirstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MemberFirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EmployeeFirstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EmployeeFirstName)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.AttendanceDate)
         </dt>
@@ -135,13 +39,13 @@
             @Html.DisplayNameFor(model => model.Member)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Member.Address)
+            @Html.DisplayFor(model => model.Member.MemberId)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Employee)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Employee.Email)
+            @Html.DisplayFor(model => model.Employee.EmployeeId)
         </dd>
     </dl>
     

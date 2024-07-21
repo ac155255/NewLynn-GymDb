@@ -62,7 +62,7 @@ namespace NewLynn_GymDb.Controllers
                 searchString = currentFilter;
             }
 
-            var members = from s in _context.Member
+            var members = from s in _context.Members
                            select s;
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -86,12 +86,12 @@ namespace NewLynn_GymDb.Controllers
         // GET: Members/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Member == null)
+            if (id == null || _context.Members == null)
             {
                 return NotFound();
             }
 
-            var member = await _context.Member
+            var member = await _context.Members
                 .FirstOrDefaultAsync(m => m.MemberId == id);
             if (member == null)
             {
@@ -126,12 +126,12 @@ namespace NewLynn_GymDb.Controllers
         // GET: Members/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Member == null)
+            if (id == null || _context.Members  == null)
             {
                 return NotFound();
             }
 
-            var member = await _context.Member.FindAsync(id);
+            var member = await _context.Members.FindAsync(id);
             if (member == null)
             {
                 return NotFound();
@@ -177,12 +177,12 @@ namespace NewLynn_GymDb.Controllers
         // GET: Members/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Member == null)
+               if (id == null || _context.Members == null)
             {
                 return NotFound();
             }
 
-            var member = await _context.Member
+            var member = await _context.Members
                 .FirstOrDefaultAsync(m => m.MemberId == id);
             if (member == null)
             {
@@ -197,14 +197,14 @@ namespace NewLynn_GymDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Member == null)
+            if (_context.Members == null)
             {
                 return Problem("Entity set 'NewLynn_GymDbContext.Member'  is null.");
             }
-            var member = await _context.Member.FindAsync(id);
+            var member = await _context.Members.FindAsync(id);
             if (member != null)
             {
-                _context.Member.Remove(member);
+                _context.Members.Remove(member);
             }
             
             await _context.SaveChangesAsync();
@@ -213,7 +213,7 @@ namespace NewLynn_GymDb.Controllers
 
         private bool MemberExists(int id)
         {
-          return (_context.Member?.Any(e => e.MemberId == id)).GetValueOrDefault();
+          return (_context.Members?.Any(e => e.MemberId == id)).GetValueOrDefault();
         }
     }
 }

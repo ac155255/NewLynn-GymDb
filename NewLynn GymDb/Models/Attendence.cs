@@ -8,30 +8,33 @@ namespace NewLynn_GymDb.Models
 {
     public class Attendance
     {
-
-        [Display(Name = "Attendance ID ")]
+        [Display(Name = "Attendance ID")]
         public int AttendanceID { get; set; }
 
-        [Required(ErrorMessage = "MemberID is required")]
-
+        [Required(ErrorMessage = "Member ID is required")]
         [Display(Name = "Member ID")]
         [Range(1, int.MaxValue, ErrorMessage = "Member must be a positive integer.")]
-        public int MemberID { get; set; }
-        
+        public int MemberId { get; set; }
 
-        [Required(ErrorMessage = "Employee is required")]
+        // Assuming you want to display Member's first name in the UI
+        [Display(Name = "Member Name")]
+        public string MemberFirstName { get; set; }
 
+        [Required(ErrorMessage = "Employee ID is required")]
         [Display(Name = "Employee ID")]
-        [Range(1, int.MaxValue, ErrorMessage = "EmployeeID must be a positive integer.")]
-        public int EmployeeID { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "Employee ID must be a positive integer.")]
+        public int EmployeeId { get; set; }
+
+        // Assuming you want to display Employee's first name in the UI
+        [Display(Name = "Employee Name")]
+        public string EmployeeFirstName { get; set; }
 
         [DateValidator]
         [Display(Name = "Attendance Date")]
-        [Required(ErrorMessage = "AttendanceDate is required")]
+        [Required(ErrorMessage = "Attendance Date is required")]
         [DataType(DataType.DateTime)]
-       
         public DateTime AttendanceDate { get; set; }
-        public static ValidationResult ValidateAttendanceDate(DateTime AttendanceDate, ValidationContext context)
+        public static ValidationResult ValidateTransactionDate(DateTime AttendanceDate, ValidationContext context)
         {
             if (AttendanceDate > DateTime.Today)
             {
@@ -42,32 +45,19 @@ namespace NewLynn_GymDb.Models
         }
 
         [Required(ErrorMessage = "Status is required")]
-        public status Status { get; set; }
-        
-       
+        public Status Status { get; set; }
 
+        // Navigation properties
         public virtual Member Member { get; set; }
-        
-
         public virtual Employee Employee { get; set; }
-
-        //This method ToListAsync is declared as internal and static, intending to return a Task<string?>. However, it currently throws a NotImplementedException, indicating it's not yet implemented and needs to be completed to provide functionality.
-        internal static Task<string?> ToListAsync()
-        {
-            throw new NotImplementedException();
-        }
     }
 
-    //This status enum defines two options: Present and Absent, representing different status.
-    public enum status { 
-    
+    // Status enum definition
+    public enum Status
+    {
         Present,
         Absent
-    
     }
-    
 
 }
-
-
 

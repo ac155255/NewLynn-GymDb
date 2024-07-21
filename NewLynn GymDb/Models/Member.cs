@@ -90,7 +90,7 @@ namespace NewLynn_GymDb.Models
         public virtual Transaction Transactions { get; set; }
 
         //a virtual navigation property Attendances of type Attendance, allowing for navigation to related attendance data within an entity framework context.
-        public virtual Attendance Attendances { get; set; }
+        public  Attendance Attendances { get; set; }
 
         internal static Task<string?> ToListAsync()
         {

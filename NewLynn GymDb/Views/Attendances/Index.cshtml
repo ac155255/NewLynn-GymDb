@@ -1,120 +1,10 @@
 ﻿@model IEnumerable<NewLynn_GymDb.Models.Attendance>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Index";
 }
 
-<style>
-    body {
-        background: url('https://cdn.openart.ai/uploads/image_IOKdgwZe_1719764793304_raw.jpg') no-repeat center center fixed;
-        background-size: cover;
-        color: white;
-    }
-
-    .jumbotron {
-        background: rgba(0, 0, 0, 0.5); /* Added a dark overlay to make the text readable */
-        text-align: center;
-        padding: 100px 25px;
-        margin: 0;
-    }
-
-        .jumbotron h1 {
-            font-size: 3em;
-            font-weight: bold;
-        }
-
-        .jumbotron p {
-            font-size: 1.2em;
-            margin: 20px 0;
-        }
-
-    .btn-members {
-        background-color: #28a745;
-        color: white;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 1em;
-    }
-
-    .features {
-        display: flex;
-        justify-content: space-around;
-        margin: 50px 0;
-        color: #fff;
-    }
-
-    .feature {
-        text-align: center;
-        width: 200px;
-    }
-
-        .feature img {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 20px;
-        }
-
-        .feature h3 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-
-        .feature p {
-            font-size: 1em;
-        }
-
-    table {
-        width: 100%;
-        margin: 20px 0;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        padding: 15px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-        color: white;
-    }
-
-    th {
-        background-color: rgba(0, 0, 0, 0.7);
-    }
-
-    tr {
-        background-color: rgba(0, 0, 0, 0.5);
-    }
-
-        tr:hover {
-            background-color: dimgrey;
-        }
-
-    .edit-link, .details-link, .delete-link {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-        .edit-link:hover, .details-link:hover, .delete-link:hover {
-            text-decoration: underline;
-        }
-
-    footer {
-        text-align: center;
-        padding: 20px 0;
-        background: rgba(0, 0, 0, 0.5);
-    }
-
-    .privacy-link {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-        .privacy-link:hover {
-            text-decoration: underline;
-        }
-</style>
-
-<h1>Attendance</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -123,16 +13,22 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.MemberFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeFirstName)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.AttendanceDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MemberID)
+                @Html.DisplayNameFor(model => model.Member.MemberId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EmployeeID)
+                @Html.DisplayNameFor(model => model.Employee.EmployeeId)
             </th>
             <th></th>
         </tr>
@@ -141,16 +37,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.MemberFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeFirstName)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.AttendanceDate)
             </td>
             <td>
-                    @item.Status.ToString()
+                @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MemberID)
+                @Html.DisplayFor(modelItem => item.Member.MemberId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EmployeeID)
+                @Html.DisplayFor(modelItem => item.Employee.EmployeeId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.AttendanceID">Edit</a> |

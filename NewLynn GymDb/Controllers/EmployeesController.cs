@@ -62,7 +62,7 @@ namespace NewLynn_GymDb.Controllers
                 searchString = currentFilter;
             }
 
-            var employees= from s in _context.Employee
+            var employees= from s in _context.Employees
                           select s;
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -87,12 +87,12 @@ namespace NewLynn_GymDb.Controllers
         // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Employee == null)
+            if (id == null || _context.Employees == null)
             {
                 return NotFound();
             }
 
-            var employee = await _context.Employee
+            var employee = await _context.Employees
                 .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
             {
@@ -127,12 +127,12 @@ namespace NewLynn_GymDb.Controllers
         // GET: Employees/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Employee == null)
+            if (id == null || _context.Employees == null)
             {
                 return NotFound();
             }
 
-            var employee = await _context.Employee.FindAsync(id);
+            var employee = await _context.Employees.FindAsync(id);
             if (employee == null)
             {
                 return NotFound();
@@ -178,12 +178,12 @@ namespace NewLynn_GymDb.Controllers
         // GET: Employees/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Employee == null)
+            if (id == null || _context.Employees == null)
             {
                 return NotFound();
             }
 
-            var employee = await _context.Employee
+            var employee = await _context.Employees
                 .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
             {
@@ -198,14 +198,14 @@ namespace NewLynn_GymDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Employee == null)
+            if (_context.Employees == null)
             {
                 return Problem("Entity set 'NewLynn_GymDbContext.Employee'  is null.");
             }
-            var employee = await _context.Employee.FindAsync(id);
+            var employee = await _context.Employees.FindAsync(id);
             if (employee != null)
             {
-                _context.Employee.Remove(employee);
+                _context.Employees.Remove(employee);
             }
             
             await _context.SaveChangesAsync();
@@ -214,7 +214,7 @@ namespace NewLynn_GymDb.Controllers
 
         private bool EmployeeExists(int id)
         {
-          return (_context.Employee?.Any(e => e.EmployeeId == id)).GetValueOrDefault();
+          return (_context.Employees?.Any(e => e.EmployeeId == id)).GetValueOrDefault();
         }
     }
 }

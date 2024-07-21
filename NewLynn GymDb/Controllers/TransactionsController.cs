@@ -68,8 +68,8 @@ namespace NewLynn_GymDb.Controllers
         // GET: Transactions/Create
         public IActionResult Create()
         {
-            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId","EmployeeId" );
-            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "MemberId");
+            ViewData["EmployeeID"] = new SelectList(_context.Employees, "EmployeeId","EmployeeId" );
+            ViewData["MemberID"] = new SelectList(_context.Members, "MemberId", "MemberId");
             return View();
         }
 
@@ -86,8 +86,8 @@ namespace NewLynn_GymDb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "Email", transaction.EmployeeID);
-            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "Address", transaction.MemberID);
+            ViewData["EmployeeID"] = new SelectList(_context.Employees, "EmployeeId", "Email", transaction.EmployeeID);
+            ViewData["MemberID"] = new SelectList(_context.Members, "MemberId", "Address", transaction.MemberID);
             return View(transaction);
         }
 
@@ -104,8 +104,8 @@ namespace NewLynn_GymDb.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "Email", transaction.EmployeeID);
-            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "Address", transaction.MemberID);
+            ViewData["EmployeeID"] = new SelectList(_context.Employees, "EmployeeId", "Email", transaction.EmployeeID);
+            ViewData["MemberID"] = new SelectList(_context.Members, "MemberId", "Address", transaction.MemberID);
             return View(transaction);
         }
 
@@ -141,8 +141,8 @@ namespace NewLynn_GymDb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "Email", transaction.EmployeeID);
-            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "Address", transaction.MemberID);
+            ViewData["EmployeeID"] = new SelectList(_context.Employees, "EmployeeId", "Email", transaction.EmployeeID);
+            ViewData["MemberID"] = new SelectList(_context.Members, "MemberId", "Address", transaction.MemberID);
             return View(transaction);
         }
 

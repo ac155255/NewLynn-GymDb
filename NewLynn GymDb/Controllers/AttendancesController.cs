@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -14,10 +11,7 @@ using NewLynn_GymDb.Models;
 
 namespace NewLynn_GymDb.Controllers
 {
-    //The [Authorize] is used to restrict access to a particular controller or action method to authenticated users only.
-
     [Authorize]
-   
     public class AttendancesController : Controller
     {
         private readonly NewLynn_GymDbContext _context;
@@ -30,19 +24,19 @@ namespace NewLynn_GymDb.Controllers
         // GET: Attendances
         public async Task<IActionResult> Index()
         {
-            var newLynn_GymDbContext = _context.Attendance.Include(a => a.Employee).Include(a => a.Member);
+            var newLynn_GymDbContext = _context.Attendances.Include(a => a.Employee).Include(a => a.Member);
             return View(await newLynn_GymDbContext.ToListAsync());
         }
 
         // GET: Attendances/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Attendance == null)
+            if (id == null || _context.Attendances == null)
             {
                 return NotFound();
             }
 
-            var attendance = await _context.Attendance
+            var attendance = await _context.Attendances
                 .Include(a => a.Employee)
                 .Include(a => a.Member)
                 .FirstOrDefaultAsync(m => m.AttendanceID == id);
@@ -57,8 +51,8 @@ namespace NewLynn_GymDb.Controllers
         // GET: Attendances/Create
         public IActionResult Create()
         {
-            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "EmployeeId");
-            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "MemberId");
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId","EmployeeId");
+            ViewData["MemberId"] = new SelectList(_context.Members, "MemberId","MemberId");
             return View();
         }
 
@@ -67,7 +61,7 @@ namespace NewLynn_GymDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AttendanceID,MemberID,EmployeeID,AttendanceDate,Status")] Attendance attendance)
+        public async Task<IActionResult> Create([Bind("AttendanceID,MemberId,MemberFirstName,EmployeeId,EmployeeFirstName,AttendanceDate,Status")] Attendance attendance)
         {
             if (!ModelState.IsValid)
             {
@@ -75,26 +69,26 @@ namespace NewLynn_GymDb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "FirstName", attendance.EmployeeID);
-            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "FirstName", attendance.MemberID);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", attendance.EmployeeId);
+            ViewData["MemberId"] = new SelectList(_context.Members, "MemberId", "MemberId", attendance.MemberId);
             return View(attendance);
         }
 
         // GET: Attendances/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Attendance == null)
+            if (id == null || _context.Attendances == null)
             {
                 return NotFound();
             }
 
-            var attendance = await _context.Attendance.FindAsync(id);
+            var attendance = await _context.Attendances.FindAsync(id);
             if (attendance == null)
             {
                 return NotFound();
             }
-            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "Email", attendance.EmployeeID);
-            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "Address", attendance.MemberID);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", attendance.EmployeeId);
+            ViewData["MemberId"] = new SelectList(_context.Members, "MemberId", "MemberId", attendance.MemberId);
             return View(attendance);
         }
 
@@ -103,14 +97,14 @@ namespace NewLynn_GymDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AttendanceID,MemberID,EmployeeID,AttendanceDate,Status")] Attendance attendance)
+        public async Task<IActionResult> Edit(int id, [Bind("AttendanceID,MemberId,MemberFirstName,EmployeeId,EmployeeFirstName,AttendanceDate,Status")] Attendance attendance)
         {
             if (id != attendance.AttendanceID)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
@@ -130,20 +124,20 @@ namespace NewLynn_GymDb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeId", "Email", attendance.EmployeeID);
-            ViewData["MemberID"] = new SelectList(_context.Member, "MemberId", "Address", attendance.MemberID);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", attendance.EmployeeId);
+            ViewData["MemberId"] = new SelectList(_context.Members, "MemberId", "MemberId", attendance.MemberId);
             return View(attendance);
         }
 
         // GET: Attendances/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Attendance == null)
+            if (id == null || _context.Attendances == null)
             {
                 return NotFound();
             }
 
-            var attendance = await _context.Attendance
+            var attendance = await _context.Attendances
                 .Include(a => a.Employee)
                 .Include(a => a.Member)
                 .FirstOrDefaultAsync(m => m.AttendanceID == id);
@@ -160,23 +154,23 @@ namespace NewLynn_GymDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Attendance == null)
+            if (_context.Attendances == null)
             {
-                return Problem("Entity set 'NewLynn_GymDbContext.Attendance'  is null.");
+                return Problem("Entity set 'NewLynn_GymDbContext.Attendances'  is null.");
             }
-            var attendance = await _context.Attendance.FindAsync(id);
+            var attendance = await _context.Attendances.FindAsync(id);
             if (attendance != null)
             {
-                _context.Attendance.Remove(attendance);
+                _context.Attendances.Remove(attendance);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AttendanceExists(int id)
         {
-            return (_context.Attendance?.Any(e => e.AttendanceID == id)).GetValueOrDefault();
+          return (_context.Attendances?.Any(e => e.AttendanceID == id)).GetValueOrDefault();
         }
     }
 }
