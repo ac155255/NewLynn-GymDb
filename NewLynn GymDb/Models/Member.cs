@@ -14,7 +14,7 @@ namespace NewLynn_GymDb.Models
 
         public int MemberId { get; set; }
 
-        //validation attributes to enforce requirements for the "Last Name" field, including length constraints, character composition, and error messages for invalid inpu
+        //validation attributes to enforce requirements for the "Last Name" field, including length constraints, character composition, and error messages for invalid input
 
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = "Last name is required")]
@@ -22,7 +22,7 @@ namespace NewLynn_GymDb.Models
         [RegularExpression(@"^[A-Za-z]+$", ErrorMessage = "Last Name must be between 3 and 50 characters long.")]
         public string LastName { get; set; }
 
-        //validation attributes to enforce requirements for the "First Name" field, including length constraints, character composition, and error messages for invalid inpu
+        //validation attributes to enforce requirements for the "First Name" field, including length constraints, character composition, and error messages for invalid input
 
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "First name is required")]

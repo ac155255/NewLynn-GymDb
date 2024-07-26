@@ -58,7 +58,7 @@ namespace NewLynn_GymDb.Data
 
             var attendances = new Attendance[]
             {
-            new Attendance{AttendanceDate=DateTime.Parse("27/06/2024 12:00:00 am"),Status=Status.Present,MemberId= 3,EmployeeId= 4},
+            new Attendance{AttendanceDate=DateTime.Parse("27/06/2024 12:00:00 am"),Status=Status.Present,MemberId= 3,EmployeeId= 4, },
              new Attendance{AttendanceDate=DateTime.Parse("05/07/2024 12:00:00 am"),Status=Status.Absent,MemberId= 4,EmployeeId = 5},
               new Attendance{AttendanceDate=DateTime.Parse("27/06/2024 12:00:00 am"),Status=Status.Present,MemberId = 5, EmployeeId = 3},
 
