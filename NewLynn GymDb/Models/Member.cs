@@ -38,8 +38,8 @@ namespace NewLynn_GymDb.Models
 
         // validation attributes to ensure that the "Phone Number" field meets criteria for a valid phone number format, displaying an error message if the format is invalid.
 
-        [Phone]
-        [RegularExpression(@"^\+?\d{1,3}[- ]?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$", ErrorMessage = "Invalid phone number format")]
+        
+        [RegularExpression(@"^(0[345679][0-9]{7,8}|02[1-9][0-9]{7,8})$", ErrorMessage = "Invalid New Zealand phone number format")]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 

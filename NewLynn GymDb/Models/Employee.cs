@@ -68,7 +68,7 @@ namespace NewLynn_GymDb.Models
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string Email { get; set; }
         [Display(Name = "Phone Number")]
-        [RegularExpression(@"^\+?\d{1,3}[- ]?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$", ErrorMessage = "Invalid phone number format")]
+        [[RegularExpression(@"^(0[345679][0-9]{7,8}|02[1-9][0-9]{7,8})$", ErrorMessage = "Invalid New Zealand phone number format")]
         public string PhoneNumber { get; set; }
 
         // validation attributes to the "Salary" field, ensuring it is displayed with the specified name, required, and formatted as a valid monetary amount with up to two decimal places, providing an error message for incorrect formats.
